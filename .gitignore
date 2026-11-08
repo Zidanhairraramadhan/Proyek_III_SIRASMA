@@ -1,0 +1,25 @@
+# SIRASMA ULBI - Git Ignore Rules
+
+# Uploads & User Generated Content
+uploads/sessions/*
+!uploads/sessions/.gitkeep
+uploads/ktm/*
+!uploads/ktm/.gitkeep
+uploads/pembayaran/*
+!uploads/pembayaran/.gitkeep
+uploads/kamar/*
+!uploads/kamar/.gitkeep
+
+# Environment & Temp Files
+.env
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 130" width="480" height="130">
+  <defs>
+    <linearGradient id="ulbiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF7A00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  
+  <!-- Emblem Hexagonal Rings -->
+  <g transform="translate(65, 65) scale(0.95)" filter="url(#shadow)">
+    <!-- 6 Petal Elements -->
+    <path d="M 0,-40 L 16,-30 L 16,-12 L 0,-2 L -16,-12 L -16,-30 Z" fill="url(#ulbiGrad)"/>
+    <path d="M 34,-20 L 50,-10 L 50,8 L 34,18 L 18,8 L 18,-10 Z" fill="url(#ulbiGrad)"/>
+    <path d="M 34,20 L 50,30 L 50,48 L 34,58 L 18,48 L 18,30 Z" transform="rotate(60) translate(-8,-8)" fill="url(#ulbiGrad)"/>
+    <path d="M 0,40 L 16,50 L 16,68 L 0,78 L -16,68 L -16,50 Z" transform="rotate(120) translate(-8,-8)" fill="url(#ulbiGrad)"/>
+    <path d="M -34,20 L -18,30 L -18,48 L -34,58 L -50,48 L -50,30 Z" transform="rotate(180) translate(-8,-8)" fill="url(#ulbiGrad)"/>
+    <path d="M -34,-20 L -18,-10 L -18,8 L -34,18 L -50,8 L -50,-10 Z" transform="rotate(240) translate(-8,-8)" fill="url(#ulbiGrad)"/>
+    <!-- Center Hexagon -->
+    <polygon points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" fill="#0D2040"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="145" y="74" font-family="'Segoe UI', -apple-system, Roboto, sans-serif" font-weight="900" font-size="62" fill="#0D2040" letter-spacing="1">ULBI</text>
+  <text x="147" y="102" font-family="'Segoe UI', -apple-system, Roboto, sans-serif" font-weight="700" font-size="14.5" fill="#E65100" letter-spacing="0.5">UNIVERSITAS LOGISTIK &amp; BISNIS INTERNASIONAL</text>
+</svg>
