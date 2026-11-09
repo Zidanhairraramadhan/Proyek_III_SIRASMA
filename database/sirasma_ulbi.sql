@@ -187,10 +187,10 @@ CREATE TABLE `pengumuman` (
 -- ========================================================
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `full_name`, `phone`, `status`) VALUES
-(1, 'admin', 'admin@ulbi.ac.id', '$2y$10$wE9q.F7tB1U6Y/xLdC0PFeZ6Lq9wKjJ3k4mQ0fK1t0uB9R9xYm6W2', 'admin', 'Pengelola Asrama ULBI', '081234567890', 'active'),
-(2, 'hasan', 'hasan.zubeir@ulbi.ac.id', '$2y$10$3p4B5z5P6eL/3nF.p5I4k.f2iO1nQ6tH5rD0sE.YwY5xK6Z9P5m5q', 'mahasiswa', 'Hasan Zubeir Pohan', '082198765432', 'active'),
-(3, 'zidan', 'zidan.ramadhan@ulbi.ac.id', '$2y$10$3p4B5z5P6eL/3nF.p5I4k.f2iO1nQ6tH5rD0sE.YwY5xK6Z9P5m5q', 'mahasiswa', 'Zidan Hairra Ramadhan', '081377889900', 'active'),
-(4, 'sarah', 'sarah.putri@ulbi.ac.id', '$2y$10$3p4B5z5P6eL/3nF.p5I4k.f2iO1nQ6tH5rD0sE.YwY5xK6Z9P5m5q', 'mahasiswa', 'Sarah Amalia Putri', '085712348877', 'active');
+(1, 'admin', 'admin@ulbi.ac.id', '$2y$10$BIFt4gfmojR8Bp13sZmBteF6250x3NdcZXZVzcrdlkwrJ4IU4cZPm', 'admin', 'Pengelola Asrama ULBI', '081234567890', 'active'),
+(2, 'hasan', 'hasan.zubeir@ulbi.ac.id', '$2y$10$bma8wmS2jfRQ5vm4Uk7aYeFKQrXQ5GnbOSCTlrmknk4NN86s7b7xi', 'mahasiswa', 'Hasan Zubeir Pohan', '082198765432', 'active'),
+(3, 'zidan', 'zidan.ramadhan@ulbi.ac.id', '$2y$10$bma8wmS2jfRQ5vm4Uk7aYeFKQrXQ5GnbOSCTlrmknk4NN86s7b7xi', 'mahasiswa', 'Zidan Hairra Ramadhan', '081377889900', 'active'),
+(4, 'sarah', 'sarah.putri@ulbi.ac.id', '$2y$10$bma8wmS2jfRQ5vm4Uk7aYeFKQrXQ5GnbOSCTlrmknk4NN86s7b7xi', 'mahasiswa', 'Sarah Amalia Putri', '085712348877', 'active');
 
 INSERT INTO `mahasiswa_profiles` (`id`, `user_id`, `npm`, `prodi`, `jurusan`, `angkatan`, `gender`, `tempat_lahir`, `tanggal_lahir`, `alamat_asal`, `kota_asal`, `provinsi_asal`, `nama_ortu_wali`, `hp_ortu_wali`, `kontak_darurat`) VALUES
 (1, 2, '714240045', 'D4 Teknik Informatika', 'Sekolah Teknologi Informasi', '2024', 'L', 'Medan', '2004-05-14', 'Jl. Dr. Mansyur No. 12', 'Medan', 'Sumatera Utara', 'Bapak Pohan', '081299990001', '081299990001 (Ayah)'),
