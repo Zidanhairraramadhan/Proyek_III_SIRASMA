@@ -83,20 +83,20 @@ require_once __DIR__ . '/../../includes/header.php';
         </div>
       <?php endif; ?>
 
-      <div class="card border-0 shadow-sm rounded-3">
-        <div class="card-header bg-white border-bottom py-3">
+      <div class="card border-0 shadow-sm rounded-4" style="border: 1px solid var(--slate-200) !important;">
+        <div class="card-header bg-white border-bottom py-3 px-4">
           <h6 class="fw-bold mb-0 text-navy">
-            <i class="bi bi-megaphone-fill text-warning me-2"></i>Daftar Pengumuman Aktif di Portal & Landing Page
+            <i class="bi bi-megaphone-fill text-warning me-2"></i>Daftar Pengumuman Aktif di Portal &amp; Landing Page
           </h6>
         </div>
 
         <div class="card-body p-0">
           <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0 small">
-              <thead class="table-light">
+            <table class="table table-custom align-middle mb-0">
+              <thead>
                 <tr>
                   <th style="width: 140px;">Tanggal</th>
-                  <th style="width: 120px;">Kategori</th>
+                  <th style="width: 130px;">Kategori</th>
                   <th>Judul Pengumuman</th>
                   <th>Ringkasan Isi</th>
                   <th style="width: 100px;" class="text-end">Aksi</th>
@@ -105,20 +105,20 @@ require_once __DIR__ . '/../../includes/header.php';
               <tbody>
                 <?php foreach ($pengumuman_list as $p): ?>
                 <tr>
-                  <td class="text-muted"><?= format_tanggal($p['tanggal']) ?></td>
+                  <td class="text-muted small"><?= format_tanggal($p['tanggal']) ?></td>
                   <td>
-                    <span class="badge bg-secondary"><?= htmlspecialchars($p['kategori']) ?></span>
+                    <span class="badge-soft badge-soft-warning"><?= htmlspecialchars($p['kategori']) ?></span>
                   </td>
                   <td>
                     <strong class="text-navy"><?= htmlspecialchars($p['judul']) ?></strong>
                   </td>
-                  <td><?= htmlspecialchars(substr($p['isi'], 0, 100)) ?>...</td>
+                  <td class="small text-secondary"><?= htmlspecialchars(substr($p['isi'], 0, 100)) ?>...</td>
                   <td class="text-end">
                     <form method="POST" action="" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengumuman ini?')">
                       <input type="hidden" name="action" value="delete">
                       <input type="hidden" name="id" value="<?= $p['id'] ?>">
                       <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
-                      <button type="submit" class="btn btn-outline-danger btn-sm" title="Hapus">
+                      <button type="submit" class="btn btn-outline-danger btn-sm" title="Hapus Pengumuman">
                         <i class="bi bi-trash"></i>
                       </button>
                     </form>

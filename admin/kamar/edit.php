@@ -115,14 +115,14 @@ require_once __DIR__ . '/../../includes/header.php';
       <?php endif; ?>
 
       <div class="row g-4 justify-content-center">
-        <div class="col-lg-8">
-          <div class="card border-0 shadow-sm rounded-3">
-            <div class="card-header bg-white border-bottom py-3">
+        <div class="col-lg-9">
+          <div class="card border-0 shadow-sm rounded-4" style="border: 1px solid var(--slate-200) !important;">
+            <div class="card-header bg-white border-bottom py-3 px-4">
               <h6 class="fw-bold mb-0 text-navy">
-                <i class="bi bi-pencil-square text-warning me-2"></i>Perbarui Rincian Kamar
+                <i class="bi bi-pencil-square text-warning me-2"></i>Perbarui Rincian Data Kamar
               </h6>
             </div>
-            <div class="card-body p-4">
+            <div class="card-body p-4 p-md-5">
               <form method="POST" action="">
                 <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
 

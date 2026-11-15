@@ -60,7 +60,10 @@ require_once __DIR__ . '/../../includes/header.php';
         <button class="btn btn-sm btn-light border d-lg-none" type="button" onclick="document.getElementById('dashboardSidebar').classList.toggle('show')">
           <i class="bi bi-list fs-5"></i>
         </button>
-        <h5 class="fw-bold mb-0 text-navy" style="color:var(--ulbi-navy);">Kelola Kamar & Fasilitas Asrama</h5>
+        <div>
+          <h5 class="fw-bold mb-0 text-navy">Kelola Kamar &amp; Fasilitas Asrama</h5>
+          <small class="text-muted d-none d-md-block">Manajemen inventaris hunian dan tarif sewa asrama</small>
+        </div>
       </div>
       <div>
         <a href="<?= BASE_URL ?>/admin/kamar/tambah.php" class="btn btn-ulbi-primary btn-sm">
@@ -71,14 +74,19 @@ require_once __DIR__ . '/../../includes/header.php';
 
     <div class="dashboard-content">
       <!-- Filter Bar -->
-      <div class="card border-0 shadow-sm rounded-3 mb-4">
-        <div class="card-body p-3">
+      <div class="card border-0 shadow-sm rounded-4 mb-4" style="border: 1px solid var(--slate-200) !important;">
+        <div class="card-body p-3 p-md-4">
           <form method="GET" action="" class="row g-2 align-items-center">
             <div class="col-md-4">
-              <input type="text" class="form-control form-control-sm" name="q" placeholder="Cari nomor kamar..." value="<?= htmlspecialchars($q) ?>">
+              <label class="form-label mb-1">Cari Kamar</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                <input type="text" class="form-control border-start-0" name="q" placeholder="Cari nomor kamar atau fasilitas..." value="<?= htmlspecialchars($q) ?>">
+              </div>
             </div>
             <div class="col-md-3">
-              <select name="asrama_id" class="form-select form-select-sm">
+              <label class="form-label mb-1">Gedung Asrama</label>
+              <select name="asrama_id" class="form-select">
                 <option value="">Semua Gedung Asrama</option>
                 <?php foreach ($daftar_asrama as $a): ?>
                   <option value="<?= $a['id'] ?>" <?= ($asrama_id == $a['id']) ? 'selected' : '' ?>>
@@ -88,7 +96,8 @@ require_once __DIR__ . '/../../includes/header.php';
               </select>
             </div>
             <div class="col-md-3">
-              <select name="status" class="form-select form-select-sm">
+              <label class="form-label mb-1">Status Kamar</label>
+              <select name="status" class="form-select">
                 <option value="">Semua Status</option>
                 <option value="tersedia" <?= ($status === 'tersedia') ? 'selected' : '' ?>>Tersedia</option>
                 <option value="penuh" <?= ($status === 'penuh') ? 'selected' : '' ?>>Penuh</option>
@@ -96,9 +105,9 @@ require_once __DIR__ . '/../../includes/header.php';
                 <option value="nonaktif" <?= ($status === 'nonaktif') ? 'selected' : '' ?>>Diarsipkan / Nonaktif</option>
               </select>
             </div>
-            <div class="col-md-2">
-              <button type="submit" class="btn btn-dark btn-sm w-100">
-                <i class="bi bi-filter me-1"></i> Saring Data
+            <div class="col-md-2 pt-md-4">
+              <button type="submit" class="btn btn-ulbi-primary w-100">
+                <i class="bi bi-filter"></i> Saring Data
               </button>
             </div>
           </form>
@@ -106,8 +115,8 @@ require_once __DIR__ . '/../../includes/header.php';
       </div>
 
       <!-- Kamar Table Card -->
-      <div class="card border-0 shadow-sm rounded-3">
-        <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+      <div class="card border-0 shadow-sm rounded-4" style="border: 1px solid var(--slate-200) !important;">
+        <div class="card-header bg-white border-bottom py-3 px-4 d-flex justify-content-between align-items-center">
           <h6 class="fw-bold mb-0 text-navy">
             <i class="bi bi-door-open-fill text-warning me-2"></i>Daftar Seluruh Kamar Asrama (<?= count($kamar_list) ?>)
           </h6>
@@ -115,10 +124,10 @@ require_once __DIR__ . '/../../includes/header.php';
 
         <div class="card-body p-0">
           <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0 small">
-              <thead class="table-light">
+            <table class="table table-custom align-middle mb-0">
+              <thead>
                 <tr>
-                  <th>Gedung & Lantai</th>
+                  <th>Gedung &amp; Lantai</th>
                   <th>Nomor Kamar</th>
                   <th>Tipe Kamar</th>
                   <th>Kapasitas / Terisi</th>
@@ -130,19 +139,22 @@ require_once __DIR__ . '/../../includes/header.php';
               <tbody>
                 <?php foreach ($kamar_list as $km): 
                   $sisa = max(0, $km['kapasitas'] - $km['terisi']);
+                  $is_l = ($km['kategori_gender'] === 'L');
                 ?>
                 <tr>
                   <td>
-                    <strong><?= htmlspecialchars($km['nama_asrama']) ?></strong>
-                    <div class="text-muted" style="font-size:0.75rem;">Lantai <?= $km['lantai'] ?> &bull; <?= ($km['kategori_gender'] === 'L') ? 'Putra' : 'Putri' ?></div>
+                    <strong class="text-navy"><?= htmlspecialchars($km['nama_asrama']) ?></strong>
+                    <div class="text-muted small">Lantai <?= $km['lantai'] ?> &bull; <?= $is_l ? 'Putra' : 'Putri' ?></div>
                   </td>
                   <td>
                     <span class="fs-6 fw-bold text-navy"><?= htmlspecialchars($km['nomor_kamar']) ?></span>
                   </td>
-                  <td><?= htmlspecialchars($km['tipe_kamar']) ?></td>
+                  <td>
+                    <span class="badge-soft badge-soft-navy"><?= htmlspecialchars($km['tipe_kamar']) ?></span>
+                  </td>
                   <td>
                     <strong><?= $km['terisi'] ?> / <?= $km['kapasitas'] ?></strong> Penghuni
-                    <span class="text-muted" style="font-size:0.75rem;">(Sisa: <?= $sisa ?>)</span>
+                    <span class="text-muted small">(Sisa: <?= $sisa ?>)</span>
                   </td>
                   <td>
                     <strong class="text-success"><?= format_rupiah($km['tarif_per_semester']) ?></strong>

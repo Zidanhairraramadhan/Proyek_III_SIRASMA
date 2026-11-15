@@ -73,23 +73,27 @@ require_once __DIR__ . '/../../includes/header.php';
         <button class="btn btn-sm btn-light border d-lg-none" type="button" onclick="document.getElementById('dashboardSidebar').classList.toggle('show')">
           <i class="bi bi-list fs-5"></i>
         </button>
-        <h5 class="fw-bold mb-0 text-navy" style="color:var(--ulbi-navy);">Laporan & Rekapitulasi Reservasi</h5>
+        <div>
+          <h5 class="fw-bold mb-0 text-navy">Laporan &amp; Rekapitulasi Reservasi</h5>
+          <small class="text-muted d-none d-md-block">Dokumen resmi rekap penerimaan sewa dan hunian mahasiswa</small>
+        </div>
       </div>
       <div>
-        <button class="btn btn-primary btn-sm" onclick="window.print()">
-          <i class="bi bi-printer me-1"></i> Cetak / Simpan Laporan PDF
+        <button class="btn btn-ulbi-primary btn-sm" onclick="window.print()">
+          <i class="bi bi-printer me-1"></i> Cetak / Simpan PDF
         </button>
       </div>
     </header>
 
     <div class="dashboard-content">
       <!-- Filter Bar (Hidden on Print) -->
-      <div class="card border-0 shadow-sm rounded-3 mb-4 no-print">
-        <div class="card-body p-3">
+      <div class="card border-0 shadow-sm rounded-4 mb-4 no-print" style="border: 1px solid var(--slate-200) !important;">
+        <div class="card-body p-3 p-md-4">
           <form method="GET" action="" class="row g-2 align-items-center">
             <div class="col-md-3">
-              <select name="periode_id" class="form-select form-select-sm">
-                <option value="">Semua Periode Akademik</option>
+              <label class="form-label mb-1">Periode Akademik</label>
+              <select name="periode_id" class="form-select">
+                <option value="">Semua Periode</option>
                 <?php foreach ($daftar_periode as $p): ?>
                   <option value="<?= $p['id'] ?>" <?= ($periode_id == $p['id']) ? 'selected' : '' ?>>
                     <?= htmlspecialchars($p['nama_periode']) ?>
@@ -99,8 +103,9 @@ require_once __DIR__ . '/../../includes/header.php';
             </div>
 
             <div class="col-md-3">
-              <select name="asrama_id" class="form-select form-select-sm">
-                <option value="">Semua Gedung Asrama</option>
+              <label class="form-label mb-1">Gedung Asrama</label>
+              <select name="asrama_id" class="form-select">
+                <option value="">Semua Gedung</option>
                 <?php foreach ($daftar_asrama as $a): ?>
                   <option value="<?= $a['id'] ?>" <?= ($asrama_id == $a['id']) ? 'selected' : '' ?>>
                     <?= htmlspecialchars($a['nama_asrama']) ?>
@@ -110,19 +115,20 @@ require_once __DIR__ . '/../../includes/header.php';
             </div>
 
             <div class="col-md-3">
-              <select name="status" class="form-select form-select-sm">
-                <option value="">Semua Status Pengajuan</option>
+              <label class="form-label mb-1">Status Pengajuan</label>
+              <select name="status" class="form-select">
+                <option value="">Semua Status</option>
                 <option value="disetujui" <?= ($status === 'disetujui') ? 'selected' : '' ?>>Disetujui Saja</option>
                 <option value="menunggu_verifikasi" <?= ($status === 'menunggu_verifikasi') ? 'selected' : '' ?>>Menunggu Verifikasi</option>
                 <option value="ditolak" <?= ($status === 'ditolak') ? 'selected' : '' ?>>Ditolak</option>
               </select>
             </div>
 
-            <div class="col-md-3 d-flex gap-2">
-              <button type="submit" class="btn btn-dark btn-sm w-100">
-                <i class="bi bi-filter me-1"></i> Tampilkan
+            <div class="col-md-3 d-flex gap-2 pt-md-4">
+              <button type="submit" class="btn btn-ulbi-primary w-100">
+                <i class="bi bi-funnel-fill"></i> Saring Data
               </button>
-              <a href="<?= BASE_URL ?>/admin/reservasi/laporan.php" class="btn btn-outline-secondary btn-sm" title="Reset">
+              <a href="<?= BASE_URL ?>/admin/reservasi/laporan.php" class="btn btn-outline-secondary" title="Reset">
                 <i class="bi bi-arrow-counterclockwise"></i>
               </a>
             </div>
@@ -131,20 +137,20 @@ require_once __DIR__ . '/../../includes/header.php';
       </div>
 
       <!-- Print Paper Container -->
-      <div class="card border-0 shadow-sm rounded-3 p-4">
+      <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5" style="border: 1px solid var(--slate-200) !important;">
         <!-- Kop Laporan Resmi -->
         <div class="d-flex align-items-center gap-3 border-bottom pb-3 mb-4">
-          <img src="<?= BASE_URL ?>/assets/img/logo-ulbi.png" alt="ULBI" style="height: 60px;">
+          <img src="<?= BASE_URL ?>/assets/img/logo-ulbi.png" alt="ULBI" style="height: 64px;">
           <div class="flex-grow-1 text-center">
             <h5 class="fw-bold mb-0 text-uppercase" style="color:var(--ulbi-navy);">UNIVERSITAS LOGISTIK DAN BISNIS INTERNASIONAL</h5>
             <h6 class="fw-bold mb-1">PENGELOLA ASRAMA MAHASISWA (SIRASMA ULBI)</h6>
-            <small class="text-muted">Jl. Sariasih No. 54, Sarijadi, Sukasari, Kota Bandung, Jawa Barat 40151</small>
+            <small class="text-muted">Jl. Sariasih No. 54, Sarijadi, Sukasari, Kota Bandung, Jawa Barat 40151 | Telp: (022) 2014032</small>
           </div>
         </div>
 
         <div class="text-center mb-4">
-          <h5 class="fw-bold text-decoration-underline mb-1">LAPORAN REKAPITULASI RESERVASI ASRAMA</h5>
-          <small class="text-muted">Dicetak pada: <?= date('d F Y, H:i') ?> WIB &bull; Oleh: <?= htmlspecialchars($user['full_name']) ?></small>
+          <h5 class="fw-bold text-decoration-underline mb-1 text-navy">LAPORAN REKAPITULASI RESERVASI ASRAMA</h5>
+          <small class="text-muted">Dicetak pada: <?= format_tanggal(date('Y-m-d'), true) ?> &bull; Oleh: <?= htmlspecialchars($user['full_name']) ?></small>
         </div>
 
         <!-- Summary Stat Badges -->

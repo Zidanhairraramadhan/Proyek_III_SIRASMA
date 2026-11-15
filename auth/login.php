@@ -86,10 +86,10 @@ require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="auth-container">
-  <div class="auth-card">
+  <div class="auth-card shadow-lg">
     <div class="auth-header">
       <a href="<?= BASE_URL ?>/index.php" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-3">
-        <div class="brand-emblem-badge" style="width: 50px; height: 50px; font-size: 1.5rem;">
+        <div class="brand-emblem-badge" style="width: 48px; height: 48px; font-size: 1.35rem;">
           <i class="bi bi-building-fill"></i>
         </div>
         <div class="text-start">
@@ -97,12 +97,12 @@ require_once __DIR__ . '/../includes/header.php';
           <div class="brand-text-sub">Reservasi Asrama Kampus</div>
         </div>
       </a>
-      <h4 class="fw-bold text-navy mb-1" style="color:var(--ulbi-navy);">Masuk ke SIRASMA</h4>
-      <p class="text-muted small">Sistem Informasi &amp; Reservasi Asrama ULBI</p>
+      <h4 class="fw-bold text-navy mb-1">Masuk ke Portal</h4>
+      <p class="text-muted small">Silakan masuk menggunakan akun civitas akademika ULBI</p>
     </div>
 
     <?php if (!empty($error)): ?>
-      <div class="alert alert-danger d-flex align-items-center mb-4 py-2" role="alert">
+      <div class="alert alert-danger d-flex align-items-center mb-4 py-2 rounded-3" role="alert">
         <i class="bi bi-exclamation-triangle-fill me-2 fs-5"></i>
         <div class="small"><?= htmlspecialchars($error) ?></div>
       </div>
@@ -112,22 +112,20 @@ require_once __DIR__ . '/../includes/header.php';
       <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
       
       <div class="mb-3">
-        <label for="username_or_email" class="form-label fw-semibold small">Username atau Email Kampus</label>
+        <label for="username_or_email" class="form-label">Username atau Email Kampus</label>
         <div class="input-group">
-          <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
-          <input type="text" class="form-control" id="username_or_email" name="username_or_email" 
+          <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-person"></i></span>
+          <input type="text" class="form-control border-start-0" id="username_or_email" name="username_or_email" 
                  placeholder="Contoh: hasan atau admin" value="<?= htmlspecialchars($_POST['username_or_email'] ?? '') ?>" required autofocus>
         </div>
       </div>
 
       <div class="mb-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <label for="password" class="form-label fw-semibold small">Kata Sandi</label>
-        </div>
+        <label for="password" class="form-label">Kata Sandi</label>
         <div class="input-group">
-          <span class="input-group-text bg-light"><i class="bi bi-lock"></i></span>
-          <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
-          <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
+          <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-lock"></i></span>
+          <input type="password" class="form-control border-start-0 border-end-0" id="password" name="password" placeholder="••••••••" required>
+          <button class="btn btn-outline-secondary border-start-0" type="button" onclick="togglePassword()" title="Lihat kata sandi">
             <i class="bi bi-eye" id="toggleIcon"></i>
           </button>
         </div>
@@ -138,39 +136,44 @@ require_once __DIR__ . '/../includes/header.php';
       </button>
     </form>
 
-    <div class="auth-divider">Akun Demo Cepat</div>
+    <div class="my-4 d-flex align-items-center gap-2">
+      <hr class="flex-grow-1 text-muted my-0">
+      <span class="small text-muted fw-semibold text-uppercase" style="font-size:0.72rem; letter-spacing:0.05em;">Akun Demo Pengujian</span>
+      <hr class="flex-grow-1 text-muted my-0">
+    </div>
+
     <div class="d-flex flex-column gap-2">
-      <button class="btn btn-sm btn-outline-primary text-start d-flex justify-content-between align-items-center py-2" 
+      <button type="button" class="btn btn-sm btn-light text-start d-flex justify-content-between align-items-center py-2 px-3 border" 
               onclick="fillAccount('admin', 'admin123')">
         <div>
-          <strong class="d-block"><i class="bi bi-shield-lock-fill text-warning me-1"></i> Admin Asrama</strong>
-          <small class="text-muted">User: admin | Pass: admin123</small>
+          <strong class="d-block text-navy small"><i class="bi bi-shield-lock-fill text-warning me-1"></i> Admin Asrama</strong>
+          <span class="text-muted" style="font-size:0.75rem;">User: admin &bull; Pass: admin123</span>
         </div>
-        <span class="badge bg-primary">Pilih</span>
+        <span class="badge-soft badge-soft-warning">Pilih</span>
       </button>
 
-      <button class="btn btn-sm btn-outline-secondary text-start d-flex justify-content-between align-items-center py-2" 
+      <button type="button" class="btn btn-sm btn-light text-start d-flex justify-content-between align-items-center py-2 px-3 border" 
               onclick="fillAccount('hasan', 'mahasiswa123')">
         <div>
-          <strong class="d-block"><i class="bi bi-person-fill text-info me-1"></i> Mahasiswa: Hasan (Penghuni)</strong>
-          <small class="text-muted">User: hasan | Pass: mahasiswa123</small>
+          <strong class="d-block text-navy small"><i class="bi bi-person-fill text-info me-1"></i> Mahasiswa: Hasan (Penghuni)</strong>
+          <span class="text-muted" style="font-size:0.75rem;">User: hasan &bull; Pass: mahasiswa123</span>
         </div>
-        <span class="badge bg-secondary">Pilih</span>
+        <span class="badge-soft badge-soft-info">Pilih</span>
       </button>
 
-      <button class="btn btn-sm btn-outline-secondary text-start d-flex justify-content-between align-items-center py-2" 
+      <button type="button" class="btn btn-sm btn-light text-start d-flex justify-content-between align-items-center py-2 px-3 border" 
               onclick="fillAccount('zidan', 'mahasiswa123')">
         <div>
-          <strong class="d-block"><i class="bi bi-person-fill text-info me-1"></i> Mahasiswa: Zidan (Pending)</strong>
-          <small class="text-muted">User: zidan | Pass: mahasiswa123</small>
+          <strong class="d-block text-navy small"><i class="bi bi-person-fill text-info me-1"></i> Mahasiswa: Zidan (Pending)</strong>
+          <span class="text-muted" style="font-size:0.75rem;">User: zidan &bull; Pass: mahasiswa123</span>
         </div>
-        <span class="badge bg-secondary">Pilih</span>
+        <span class="badge-soft badge-soft-info">Pilih</span>
       </button>
     </div>
 
-    <div class="text-center mt-4 pt-2 border-top">
+    <div class="text-center mt-4 pt-3 border-top">
       <p class="small text-muted mb-0">Belum memiliki akun mahasiswa? 
-        <a href="<?= BASE_URL ?>/auth/register.php" class="fw-bold text-decoration-none" style="color:var(--ulbi-orange);">Daftar di sini</a>
+        <a href="<?= BASE_URL ?>/auth/register.php" class="fw-bold text-decoration-none" style="color:var(--ulbi-orange);">Daftar Akun Baru</a>
       </p>
     </div>
   </div>

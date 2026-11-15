@@ -131,29 +131,35 @@ require_once __DIR__ . '/../includes/header.php';
         <button class="btn btn-sm btn-light border d-lg-none" type="button" onclick="document.getElementById('dashboardSidebar').classList.toggle('show')">
           <i class="bi bi-list fs-5"></i>
         </button>
-        <h5 class="fw-bold mb-0 text-navy" style="color:var(--ulbi-navy);">Formulir Pengajuan Reservasi</h5>
+        <div>
+          <h5 class="fw-bold mb-0 text-navy" style="color:var(--ulbi-navy);">Pengajuan Reservasi Kamar</h5>
+          <span class="text-muted small">Pilih kamar dan lengkapi jadwal rencana hunian asrama Anda</span>
+        </div>
       </div>
       <div>
-        <a href="<?= BASE_URL ?>/mahasiswa/index.php" class="btn btn-outline-secondary btn-sm">
-          <i class="bi bi-arrow-left me-1"></i> Batal / Kembali
+        <a href="<?= BASE_URL ?>/mahasiswa/index.php" class="btn btn-light border btn-sm px-3">
+          <i class="bi bi-arrow-left me-1"></i> Kembali ke Dashboard
         </a>
       </div>
     </header>
 
     <div class="dashboard-content">
       <?php if (!empty($error)): ?>
-        <div class="alert alert-danger d-flex align-items-center mb-4 py-2" role="alert">
-          <i class="bi bi-exclamation-triangle-fill me-2 fs-5"></i>
-          <div class="small"><?= htmlspecialchars($error) ?></div>
+        <div class="alert alert-danger d-flex align-items-center mb-4 py-3 rounded-4 shadow-sm border-0" role="alert">
+          <i class="bi bi-exclamation-triangle-fill me-3 fs-4 text-danger"></i>
+          <div>
+            <strong class="d-block">Gagal Mengajukan Reservasi</strong>
+            <span class="small"><?= htmlspecialchars($error) ?></span>
+          </div>
         </div>
       <?php endif; ?>
 
       <div class="row g-4">
         <div class="col-lg-8">
-          <div class="card border-0 shadow-sm rounded-3">
+          <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom py-3">
               <h6 class="fw-bold mb-0 text-navy">
-                <i class="bi bi-pencil-square text-warning me-2"></i>Data Permohonan Reservasi Hunian
+                <i class="bi bi-pencil-square text-orange me-2"></i>Formulir Permohonan Reservasi
               </h6>
             </div>
 
@@ -162,32 +168,43 @@ require_once __DIR__ . '/../includes/header.php';
                 <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
 
                 <!-- Info Pemohon Ringkas -->
-                <div class="p-3 bg-light rounded-3 border mb-4">
-                  <div class="row small">
-                    <div class="col-sm-6 mb-1">
-                      <span class="text-muted">Nama Pemohon:</span> <strong><?= htmlspecialchars($user['full_name']) ?></strong>
-                    </div>
-                    <div class="col-sm-6 mb-1">
-                      <span class="text-muted">NPM:</span> <strong><?= htmlspecialchars($profile['npm'] ?? '-') ?></strong>
+                <div class="p-3 bg-light rounded-4 border mb-4">
+                  <div class="row g-2 small">
+                    <div class="col-sm-6">
+                      <span class="text-muted d-block">Nama Lengkap Pemohon:</span>
+                      <strong class="text-navy"><?= htmlspecialchars($user['full_name']) ?></strong>
                     </div>
                     <div class="col-sm-6">
-                      <span class="text-muted">Program Studi:</span> <strong><?= htmlspecialchars($profile['prodi'] ?? '-') ?></strong>
+                      <span class="text-muted d-block">NPM / Identitas:</span>
+                      <strong class="text-navy"><?= htmlspecialchars($profile['npm'] ?? '-') ?></strong>
                     </div>
                     <div class="col-sm-6">
-                      <span class="text-muted">Peruntukan Asrama:</span> 
-                      <span class="badge bg-<?= ($mhs_gender === 'L') ? 'primary' : 'danger' ?>">
-                        <?= ($mhs_gender === 'L') ? 'Putra (Tower Al-Fatih)' : 'Putri (Tower An-Nisa)' ?>
+                      <span class="text-muted d-block">Program Studi:</span>
+                      <strong class="text-navy"><?= htmlspecialchars($profile['prodi'] ?? '-') ?></strong>
+                    </div>
+                    <div class="col-sm-6">
+                      <span class="text-muted d-block">Gedung Dialokasikan:</span> 
+                      <span class="badge <?= ($mhs_gender === 'L') ? 'badge-soft-primary' : 'badge-soft-danger' ?>">
+                        <i class="bi bi-building me-1"></i><?= ($mhs_gender === 'L') ? 'Asrama Putra (Tower Al-Fatih)' : 'Asrama Putri (Tower An-Nisa)' ?>
                       </span>
                     </div>
                   </div>
                 </div>
 
                 <div class="row g-3">
+                  <!-- Section 1: Pemilihan Kamar -->
+                  <div class="col-12">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                      <span class="d-inline-flex align-items-center justify-content-center bg-orange text-white rounded-circle fw-bold" style="width:24px;height:24px;font-size:0.75rem;">1</span>
+                      <h6 class="fw-bold text-navy mb-0">Pilih Kamar & Periode Akademik</h6>
+                    </div>
+                  </div>
+
                   <!-- Pilih Kamar -->
                   <div class="col-md-12">
-                    <label class="form-label small fw-semibold">Pilih Kamar Asrama yang Tersedia *</label>
-                    <select class="form-select" id="kamar_id" name="kamar_id" required onchange="updateRoomDetails()">
-                      <option value="">-- Pilih Nomor Kamar --</option>
+                    <label class="form-label small fw-semibold">Pilih Kamar Asrama yang Tersedia <span class="text-danger">*</span></label>
+                    <select class="form-select form-select-lg" id="kamar_id" name="kamar_id" required onchange="updateRoomDetails()" style="font-size:0.95rem;">
+                      <option value="">-- Pilih Nomor Kamar Asrama --</option>
                       <?php foreach ($available_rooms as $kr): 
                         $selected = ($preselect_kamar_id === (int)$kr['id']) ? 'selected' : '';
                         $sisa = $kr['kapasitas'] - $kr['terisi'];
@@ -198,7 +215,7 @@ require_once __DIR__ . '/../includes/header.php';
                                 data-tipe="<?= htmlspecialchars($kr['tipe_kamar']) ?>"
                                 data-fas="<?= htmlspecialchars($kr['fasilitas_kamar']) ?>"
                                 <?= $selected ?>>
-                          Kamar <?= htmlspecialchars($kr['nomor_kamar']) ?> (Lt. <?= $kr['lantai'] ?>) - <?= htmlspecialchars($kr['tipe_kamar']) ?> &mdash; Sisa <?= $sisa ?> Slot &mdash; <?= format_rupiah($kr['tarif_per_semester']) ?>/sem
+                          Kamar <?= htmlspecialchars($kr['nomor_kamar']) ?> (Lt. <?= $kr['lantai'] ?>) - <?= htmlspecialchars($kr['tipe_kamar']) ?> &bull; Sisa <?= $sisa ?> Slot &bull; <?= format_rupiah($kr['tarif_per_semester']) ?>/sem
                         </option>
                       <?php endforeach; ?>
                     </select>
@@ -206,15 +223,18 @@ require_once __DIR__ . '/../includes/header.php';
 
                   <!-- Detail Kamar Terpilih Box -->
                   <div class="col-md-12" id="roomDetailBox" style="display: none;">
-                    <div class="p-3 bg-white border border-primary rounded-3 shadow-sm">
-                      <h6 class="fw-bold text-primary mb-1" id="detailTipe">-</h6>
+                    <div class="p-3 rounded-4 shadow-sm" style="background:#F0FDF4; border: 1px solid #BBF7D0;">
+                      <div class="d-flex align-items-center gap-2 mb-1">
+                        <i class="bi bi-door-open-fill text-success"></i>
+                        <h6 class="fw-bold text-success mb-0" id="detailTipe">-</h6>
+                      </div>
                       <p class="small text-muted mb-0" id="detailFasilitas">-</p>
                     </div>
                   </div>
 
                   <!-- Pilih Periode -->
                   <div class="col-md-6">
-                    <label class="form-label small fw-semibold">Periode Akademik *</label>
+                    <label class="form-label small fw-semibold">Periode Akademik <span class="text-danger">*</span></label>
                     <select class="form-select" name="periode_id" required>
                       <?php foreach ($periods as $p): ?>
                         <option value="<?= $p['id'] ?>">
@@ -226,41 +246,50 @@ require_once __DIR__ . '/../includes/header.php';
 
                   <!-- Durasi Sewa -->
                   <div class="col-md-6">
-                    <label class="form-label small fw-semibold">Durasi Sewa *</label>
+                    <label class="form-label small fw-semibold">Durasi Sewa <span class="text-danger">*</span></label>
                     <select class="form-select" id="durasi_sewa" name="durasi_sewa" required onchange="calculatePrice()">
                       <option value="1 Semester">1 Semester (6 Bulan)</option>
                       <option value="1 Tahun">1 Tahun Penuh (12 Bulan)</option>
                     </select>
                   </div>
 
+                  <!-- Section 2: Jadwal & Berkas -->
+                  <div class="col-12 mt-4">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                      <span class="d-inline-flex align-items-center justify-content-center bg-orange text-white rounded-circle fw-bold" style="width:24px;height:24px;font-size:0.75rem;">2</span>
+                      <h6 class="fw-bold text-navy mb-0">Jadwal Masuk & Berkas Identitas</h6>
+                    </div>
+                  </div>
+
                   <!-- Rencana Checkin -->
                   <div class="col-md-6">
-                    <label class="form-label small fw-semibold">Rencana Tanggal Masuk (Check-in) *</label>
+                    <label class="form-label small fw-semibold">Rencana Tanggal Masuk (Check-in) <span class="text-danger">*</span></label>
                     <input type="date" class="form-control" name="rencana_checkin" value="<?= date('Y-m-d', strtotime('+3 days')) ?>" required>
-                    <small class="text-muted" style="font-size: 0.75rem;">Estimasi tanggal kehadiran di asrama ULBI.</small>
+                    <small class="text-muted" style="font-size: 0.75rem;">Estimasi tanggal tiba pertama kali di asrama.</small>
                   </div>
 
                   <!-- Dokumen KTM / Bukti -->
                   <div class="col-md-6">
                     <label class="form-label small fw-semibold">Unggah Salinan KTM / Tanda Registrasi</label>
                     <input type="file" class="form-control" name="dokumen_ktm" accept=".jpg,.jpeg,.png,.pdf">
-                    <small class="text-muted" style="font-size: 0.75rem;">Format: JPG, PNG, atau PDF (Maks. 5MB).</small>
+                    <small class="text-muted" style="font-size: 0.75rem;">Format: JPG, PNG, atau PDF (Maksimal 5MB).</small>
                   </div>
 
                   <!-- Catatan Tambahan -->
                   <div class="col-md-12">
                     <label class="form-label small fw-semibold">Catatan Khusus / Kebutuhan Tambahan (Opsional)</label>
-                    <textarea class="form-control" name="catatan_mahasiswa" rows="3" placeholder="Contoh: Mengajukan ranjang bagian bawah karena riwayat kesehatan, atau perkiraan tiba malam hari..."></textarea>
+                    <textarea class="form-control" name="catatan_mahasiswa" rows="3" placeholder="Contoh: Mengajukan ranjang bagian bawah karena pertimbangan kesehatan fisik, atau jadwal perkiraan tiba larut malam..."></textarea>
                   </div>
                 </div>
 
-                <div class="p-3 bg-light rounded-3 border mt-4 mb-4 d-flex justify-content-between align-items-center">
+                <!-- Estimasi Biaya Box -->
+                <div class="p-4 bg-light rounded-4 border mt-4 mb-4 d-flex flex-wrap justify-content-between align-items-center gap-3">
                   <div>
                     <span class="small text-muted d-block">Estimasi Total Biaya Sewa:</span>
-                    <strong class="fs-4 text-success" id="displayTotal">Rp 0</strong>
+                    <strong class="fs-3 text-success fw-bold" id="displayTotal">Rp 0</strong>
                   </div>
-                  <div class="text-end text-muted small">
-                    <i class="bi bi-info-circle me-1"></i> Pembayaran dilakukan setelah verifikasi disetujui.
+                  <div class="text-md-end text-muted small" style="max-width:320px;">
+                    <i class="bi bi-info-circle text-primary me-1"></i> Pembayaran dapat ditransfer setelah permohonan disetujui oleh pengelola asrama.
                   </div>
                 </div>
 
@@ -271,8 +300,8 @@ require_once __DIR__ . '/../includes/header.php';
                   </label>
                 </div>
 
-                <button type="submit" class="btn btn-ulbi-primary btn-lg w-100">
-                  <i class="bi bi-send-check-fill me-1"></i> Kirim Pengajuan Reservasi Sekarang
+                <button type="submit" class="btn btn-orange btn-lg w-100 shadow-sm py-3 fw-bold">
+                  <i class="bi bi-send-check-fill me-2"></i> Kirim Pengajuan Reservasi Sekarang
                 </button>
               </form>
             </div>
@@ -281,33 +310,56 @@ require_once __DIR__ . '/../includes/header.php';
 
         <!-- Sidebar Info -->
         <div class="col-lg-4">
-          <div class="card border-0 shadow-sm rounded-3 mb-4">
+          <div class="card border-0 shadow-sm rounded-4 mb-4">
             <div class="card-header bg-white border-bottom py-3">
-              <h6 class="fw-bold mb-0 text-navy"><i class="bi bi-shield-check text-warning me-2"></i>Ketentuan Verifikasi</h6>
+              <h6 class="fw-bold mb-0 text-navy"><i class="bi bi-shield-check text-orange me-2"></i>Proses & Ketentuan</h6>
             </div>
             <div class="card-body p-4">
               <ul class="list-unstyled small text-secondary mb-0">
-                <li class="mb-3 d-flex gap-2">
-                  <i class="bi bi-check2-circle text-success fs-5"></i>
-                  <span>Permohonan akan diverifikasi oleh staf asrama dalam 1-2 hari kerja.</span>
+                <li class="mb-3 d-flex gap-3">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-light text-success flex-shrink-0" style="width:32px;height:32px;">
+                    <i class="bi bi-check2"></i>
+                  </div>
+                  <div>
+                    <strong class="text-navy d-block">Verifikasi Cepat:</strong>
+                    <span>Permohonan diverifikasi staf asrama dalam 1-2 hari kerja sesuai ketersediaan kuota.</span>
+                  </div>
                 </li>
-                <li class="mb-3 d-flex gap-2">
-                  <i class="bi bi-check2-circle text-success fs-5"></i>
-                  <span>Status permohonan dapat dipantau real-time pada menu <strong>Riwayat & Status</strong>.</span>
+                <li class="mb-3 d-flex gap-3">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-light text-success flex-shrink-0" style="width:32px;height:32px;">
+                    <i class="bi bi-bell"></i>
+                  </div>
+                  <div>
+                    <strong class="text-navy d-block">Pelacakan Real-time:</strong>
+                    <span>Status reservasi dapat dipantau langsung dari menu Riwayat & Status Pengajuan.</span>
+                  </div>
                 </li>
-                <li class="mb-3 d-flex gap-2">
-                  <i class="bi bi-check2-circle text-success fs-5"></i>
-                  <span>Pengajuan dapat dibatalkan mandiri sebelum admin memproses atau menyetujui.</span>
+                <li class="mb-3 d-flex gap-3">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-light text-success flex-shrink-0" style="width:32px;height:32px;">
+                    <i class="bi bi-x-circle"></i>
+                  </div>
+                  <div>
+                    <strong class="text-navy d-block">Fleksibilitas Batal:</strong>
+                    <span>Dapat dibatalkan secara mandiri sebelum status disetujui oleh admin.</span>
+                  </div>
                 </li>
-                <li class="d-flex gap-2">
-                  <i class="bi bi-check2-circle text-success fs-5"></i>
-                  <span>Setelah disetujui, bukti reservasi digital dapat dicetak untuk check-in.</span>
+                <li class="d-flex gap-3">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-light text-success flex-shrink-0" style="width:32px;height:32px;">
+                    <i class="bi bi-printer"></i>
+                  </div>
+                  <div>
+                    <strong class="text-navy d-block">Cetak Bukti Digital:</strong>
+                    <span>Setelah disetujui dan lunas, cetak bukti reservasi resmi sebagai pas check-in asrama.</span>
+                  </div>
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </main>
+</div>
     </div>
   </main>
 </div>

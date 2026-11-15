@@ -2,6 +2,7 @@
 /**
  * SIRASMA ULBI - Beranda Utama (Landing Page)
  * Universitas Logistik dan Bisnis Internasional (ULBI)
+ * Modern Minimalist + Elegant Campus SaaS Prototype
  */
 $page_title = 'Beranda - Sistem Reservasi Asrama Mahasiswa';
 require_once __DIR__ . '/config/config.php';
@@ -34,83 +35,91 @@ require_once __DIR__ . '/includes/header.php';
 <section class="hero-section">
   <div class="container position-relative" style="z-index: 2;">
     <div class="row align-items-center g-5">
-      <div class="col-lg-7">
+      <div class="col-lg-7 animate-fade-in-up">
         <div class="hero-badge">
           <span class="pulse-dot"></span>
-          <span>Layanan Resmi Asrama Mahasiswa ULBI Bandung</span>
+          <span>Layanan Resmi Hunian Kampus ULBI Bandung</span>
         </div>
         <h1 class="hero-title">
           Hunian Asrama Nyaman &amp; Kondusif untuk <span class="highlight-text">Mahasiswa ULBI</span>
         </h1>
         <p class="hero-subtitle">
-          SIRASMA menyatukan informasi fasilitas, ketersediaan kamar secara real-time, dan pengajuan reservasi asrama dalam satu layanan terpadu, aman, dan transparan bagi mahasiswa.
+          SIRASMA menghadirkan kemudahan eksplorasi fasilitas, pemantauan ketersediaan kamar secara <em>real-time</em>, dan alur pendaftaran terpadu yang aman, tertib, dan transparan bagi mahasiswa.
         </p>
-        <div class="d-flex flex-wrap gap-3">
-          <a href="<?= BASE_URL ?>/info_kamar.php" class="btn btn-ulbi-primary btn-lg px-4">
-            <i class="bi bi-door-open-fill me-2"></i> Lihat Ketersediaan Kamar
+        <div class="d-flex flex-wrap gap-3 pt-2">
+          <a href="<?= BASE_URL ?>/info_kamar.php" class="btn btn-ulbi-primary btn-lg">
+            <i class="bi bi-door-open-fill"></i> Lihat Ketersediaan Kamar
           </a>
-          <a href="<?= BASE_URL ?>/panduan.php" class="btn btn-ulbi-glass btn-lg px-4">
-            <i class="bi bi-journal-text me-2"></i> Panduan Alur Reservasi
+          <a href="<?= BASE_URL ?>/panduan.php" class="btn btn-ulbi-glass btn-lg">
+            <i class="bi bi-journal-text"></i> Alur Reservasi &amp; Aturan
           </a>
         </div>
       </div>
 
       <!-- Modern Hero Showcase Glass Card -->
-      <div class="col-lg-5">
+      <div class="col-lg-5 animate-fade-in-up delay-1">
         <div class="hero-showcase-card">
-          <div class="hero-card-header">
+          <div class="d-flex justify-content-between align-items-start mb-3 pb-3 border-bottom border-light border-opacity-10">
             <div>
-              <span class="badge bg-success-subtle text-success border border-success px-2 py-1 small rounded-pill">
-                <i class="bi bi-check-circle-fill me-1"></i> Periode Ganjil 2026/2027
+              <span class="badge-soft badge-soft-success">
+                <i class="bi bi-check-circle-fill"></i> Periode Ganjil 2026/2027
               </span>
-              <h5 class="fw-bold text-white mb-0 mt-2">Kompleks Asrama Kampus</h5>
-              <small class="text-warning"><i class="bi bi-geo-alt-fill me-1"></i> Jl. Sariasih No. 54, Sarijadi Bandung</small>
+              <h5 class="fw-bold text-white mb-0 mt-2">Kompleks Asrama Terpadu</h5>
+              <small class="text-warning"><i class="bi bi-geo-alt-fill me-1"></i> Kampus ULBI, Sarijadi - Bandung</small>
             </div>
-            <div class="text-end">
-              <span class="badge bg-light text-dark fw-bold px-3 py-2 rounded-3">
-                <i class="bi bi-star-fill text-warning me-1"></i> 4.9 / 5
-              </span>
-            </div>
+            <span class="badge bg-white text-dark fw-bold px-3 py-2 rounded-3 shadow-sm">
+              <i class="bi bi-star-fill text-warning me-1"></i> 4.9 / 5
+            </span>
           </div>
 
-          <!-- Dormitory Mini Highlights -->
+          <!-- Dormitory Highlights Cards -->
           <div class="row g-2 mb-3">
             <div class="col-6">
-              <div class="p-2 rounded-3" style="background: rgba(2, 132, 199, 0.2); border: 1px solid rgba(2, 132, 199, 0.35);">
+              <div class="p-3 rounded-3" style="background: rgba(2, 132, 199, 0.18); border: 1px solid rgba(2, 132, 199, 0.35);">
                 <small class="text-info d-block fw-bold"><i class="bi bi-gender-male me-1"></i> Tower Al-Fatih</small>
-                <div class="text-white small fw-semibold">Asrama Putra (4 Lt)</div>
+                <div class="text-white small fw-bold">Asrama Putra (4 Lantai)</div>
+                <div style="font-size: 0.72rem; color: #cbd5e1;" class="mt-1">Kapasitas 120 Penghuni</div>
               </div>
             </div>
             <div class="col-6">
-              <div class="p-2 rounded-3" style="background: rgba(236, 72, 153, 0.2); border: 1px solid rgba(236, 72, 153, 0.35);">
+              <div class="p-3 rounded-3" style="background: rgba(236, 72, 153, 0.18); border: 1px solid rgba(236, 72, 153, 0.35);">
                 <small class="text-warning d-block fw-bold"><i class="bi bi-gender-female me-1"></i> Tower An-Nisa</small>
-                <div class="text-white small fw-semibold">Asrama Putri (4 Lt)</div>
+                <div class="text-white small fw-bold">Asrama Putri (4 Lantai)</div>
+                <div style="font-size: 0.72rem; color: #cbd5e1;" class="mt-1">Kapasitas 120 Penghuni</div>
               </div>
             </div>
           </div>
 
-          <!-- Modern Floating Benefit Chips -->
-          <div class="hero-floating-chip">
-            <i class="bi bi-wifi text-warning fs-5"></i>
-            <div>
-              <div class="fw-bold text-white">WiFi Kampus High-Speed 100 Mbps</div>
-              <div style="font-size: 0.72rem; color: #94a3b8;">Koneksi stabil untuk perkuliahan &amp; tugas</div>
+          <!-- Modern Highlight Chips -->
+          <div class="d-flex flex-column gap-2">
+            <div class="d-flex align-items-center gap-3 p-2 rounded-3" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);">
+              <div class="feature-icon-wrapper icon-orange mb-0" style="width: 38px; height: 38px; font-size: 1.1rem;">
+                <i class="bi bi-wifi"></i>
+              </div>
+              <div>
+                <div class="fw-bold text-white small">WiFi Kampus High-Speed 100 Mbps</div>
+                <div style="font-size: 0.72rem; color: #94a3b8;">Koneksi stabil di seluruh lantai &amp; kamar</div>
+              </div>
             </div>
-          </div>
 
-          <div class="hero-floating-chip">
-            <i class="bi bi-shield-check text-success fs-5"></i>
-            <div>
-              <div class="fw-bold text-white">Keamanan &amp; CCTV 24 Jam Nonstop</div>
-              <div style="font-size: 0.72rem; color: #94a3b8;">Akses gerbang RFID dan pengawas asrama</div>
+            <div class="d-flex align-items-center gap-3 p-2 rounded-3" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);">
+              <div class="feature-icon-wrapper icon-green mb-0" style="width: 38px; height: 38px; font-size: 1.1rem;">
+                <i class="bi bi-shield-check"></i>
+              </div>
+              <div>
+                <div class="fw-bold text-white small">Sistem Keamanan &amp; CCTV 24 Jam</div>
+                <div style="font-size: 0.72rem; color: #94a3b8;">Akses gerbang RFID dan pengawas asrama</div>
+              </div>
             </div>
-          </div>
 
-          <div class="hero-floating-chip mb-0">
-            <i class="bi bi-geo-alt-fill text-danger fs-5"></i>
-            <div>
-              <div class="fw-bold text-white">3 Menit Jalan Kaki ke Ruang Kuliah</div>
-              <div style="font-size: 0.72rem; color: #94a3b8;">Tepat di dalam lingkungan kampus ULBI</div>
+            <div class="d-flex align-items-center gap-3 p-2 rounded-3" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);">
+              <div class="feature-icon-wrapper icon-blue mb-0" style="width: 38px; height: 38px; font-size: 1.1rem;">
+                <i class="bi bi-geo-alt-fill"></i>
+              </div>
+              <div>
+                <div class="fw-bold text-white small">3 Menit Jalan Kaki ke Ruang Kuliah</div>
+                <div style="font-size: 0.72rem; color: #94a3b8;">Lokasi strategis di dalam kawasan kampus ULBI</div>
+              </div>
             </div>
           </div>
         </div>
@@ -120,50 +129,50 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Quick Stat Counters -->
-<section class="py-4 bg-white border-bottom shadow-sm">
+<section class="py-4 bg-white border-bottom shadow-xs">
   <div class="container">
     <div class="row g-3">
       <div class="col-6 col-lg-3">
-        <div class="stat-pill-box d-flex align-items-center gap-3">
+        <div class="p-3 d-flex align-items-center gap-3 rounded-3" style="background: var(--slate-50); border: 1px solid var(--slate-200);">
           <div class="feature-icon-wrapper icon-orange mb-0">
             <i class="bi bi-building"></i>
           </div>
           <div>
-            <h3 class="fw-bold mb-0 text-navy" style="font-size: 1.6rem;"><?= $stat_total_asrama ?> Gedung</h3>
-            <small class="text-muted fw-semibold">Tower Putra &amp; Putri</small>
+            <div class="stat-number fs-3"><?= $stat_total_asrama ?></div>
+            <small class="text-muted fw-semibold">Gedung Tower</small>
           </div>
         </div>
       </div>
       <div class="col-6 col-lg-3">
-        <div class="stat-pill-box d-flex align-items-center gap-3">
+        <div class="p-3 d-flex align-items-center gap-3 rounded-3" style="background: var(--slate-50); border: 1px solid var(--slate-200);">
           <div class="feature-icon-wrapper icon-green mb-0">
-            <i class="bi bi-door-open"></i>
+            <i class="bi bi-door-open-fill"></i>
           </div>
           <div>
-            <h3 class="fw-bold mb-0 text-success" style="font-size: 1.6rem;"><?= $stat_kamar_tersedia ?> Kamar</h3>
-            <small class="text-muted fw-semibold">Siap Huni (Tersedia)</small>
+            <div class="stat-number fs-3 text-success"><?= $stat_kamar_tersedia ?></div>
+            <small class="text-muted fw-semibold">Kamar Tersedia</small>
           </div>
         </div>
       </div>
       <div class="col-6 col-lg-3">
-        <div class="stat-pill-box d-flex align-items-center gap-3">
+        <div class="p-3 d-flex align-items-center gap-3 rounded-3" style="background: var(--slate-50); border: 1px solid var(--slate-200);">
           <div class="feature-icon-wrapper icon-blue mb-0">
-            <i class="bi bi-people"></i>
+            <i class="bi bi-people-fill"></i>
           </div>
           <div>
-            <h3 class="fw-bold mb-0 text-primary" style="font-size: 1.6rem;"><?= $stat_total_terisi ?> Slot</h3>
-            <small class="text-muted fw-semibold">Mahasiswa Terisi</small>
+            <div class="stat-number fs-3 text-info"><?= $stat_total_terisi ?></div>
+            <small class="text-muted fw-semibold">Slot Terisi</small>
           </div>
         </div>
       </div>
       <div class="col-6 col-lg-3">
-        <div class="stat-pill-box d-flex align-items-center gap-3">
-          <div class="feature-icon-wrapper icon-purple mb-0">
-            <i class="bi bi-shield-check"></i>
+        <div class="p-3 d-flex align-items-center gap-3 rounded-3" style="background: var(--slate-50); border: 1px solid var(--slate-200);">
+          <div class="feature-icon-wrapper icon-navy mb-0">
+            <i class="bi bi-shield-lock-fill"></i>
           </div>
           <div>
-            <h3 class="fw-bold mb-0 text-dark" style="font-size: 1.6rem;">24 Jam</h3>
-            <small class="text-muted fw-semibold">Keamanan &amp; CCTV</small>
+            <div class="stat-number fs-3 text-navy">24 Jam</div>
+            <small class="text-muted fw-semibold">Keamanan Terpadu</small>
           </div>
         </div>
       </div>
@@ -175,70 +184,82 @@ require_once __DIR__ . '/includes/header.php';
 <section class="py-5">
   <div class="container">
     <div class="text-center mb-5">
-      <span class="badge bg-warning text-dark px-3 py-2 fw-semibold rounded-pill mb-2">Lokasi & Bangunan</span>
-      <h2 class="fw-bold" style="color:var(--ulbi-navy);">Pilihan Gedung Asrama Kampus ULBI</h2>
-      <p class="text-muted mx-auto" style="max-width: 650px;">
-        Asrama ULBI terbagi dalam zona khusus mahasiswa putra dan mahasiswi putri yang menjamin privasi, keamanan, dan ketertiban.
+      <span class="badge-soft badge-soft-warning mb-2">Kompleks Bangunan</span>
+      <h2 class="fw-bold" style="color:var(--ulbi-navy);">Pilihan Gedung Asrama Mahasiswa</h2>
+      <p class="text-muted mx-auto" style="max-width: 640px;">
+        Asrama ULBI terbagi dalam zona khusus mahasiswa putra dan mahasiswi putri guna menjamin privasi, kenyamanan, dan ketertiban kehidupan kampus.
       </p>
     </div>
 
     <div class="row g-4">
-      <!-- Asrama Putra -->
+      <!-- Asrama Putra Card -->
       <div class="col-md-6">
-        <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
-          <div class="p-4" style="background: linear-gradient(135deg, #0d2040 0%, #1a365d 100%); color: #fff;">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <span class="badge bg-primary px-3 py-1">Khusus Laki-laki</span>
-              <span class="badge bg-light text-dark">4 Lantai</span>
+        <div class="dorm-card">
+          <div class="dorm-card-img-wrapper" style="background: linear-gradient(135deg, #0F1E35 0%, #1E3A5F 100%);">
+            <div class="dorm-card-badge">
+              <span class="badge-soft badge-soft-info"><i class="bi bi-gender-male"></i> Khusus Putra</span>
             </div>
-            <h3 class="fw-bold mb-1">Gedung Asrama Putra</h3>
-            <p class="text-warning small mb-0"><i class="bi bi-tag-fill me-1"></i> Tower Al-Fatih (Zona Barat Kampus)</p>
+            <div class="text-center text-white px-3">
+              <i class="bi bi-buildings fs-1 mb-2 text-info opacity-75"></i>
+              <h4 class="fw-bold mb-0">Tower Al-Fatih</h4>
+              <small class="text-light opacity-75">Gedung Asrama Mahasiswa Putra</small>
+            </div>
           </div>
-          <div class="card-body p-4">
-            <p class="text-secondary small mb-3">
-              Dilengkapi dengan ruang belajar bersama, musholla representatif, akses parkir kendaraan roda dua, serta lingkungan tenang yang berjarak hanya 3 menit jalan kaki ke gedung rektorat dan perkuliahan.
-            </p>
-            <h6 class="fw-bold small text-uppercase text-muted mb-2">Fasilitas Utama:</h6>
-            <div class="d-flex flex-wrap gap-2 mb-4">
-              <span class="badge bg-light text-dark border"><i class="bi bi-wifi text-primary me-1"></i> WiFi Kampus</span>
-              <span class="badge bg-light text-dark border"><i class="bi bi-cup-hot text-danger me-1"></i> Dapur Bersama</span>
-              <span class="badge bg-light text-dark border"><i class="bi bi-building text-info me-1"></i> Musholla</span>
-              <span class="badge bg-light text-dark border"><i class="bi bi-shield-check text-success me-1"></i> CCTV 24 Jam</span>
-              <span class="badge bg-light text-dark border"><i class="bi bi-p-square text-secondary me-1"></i> Parkir Motor</span>
+          <div class="dorm-card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-muted small"><i class="bi bi-geo-alt-fill text-warning me-1"></i> Zona Barat Kampus ULBI</span>
+              <span class="badge bg-light text-dark border">4 Lantai &bull; 120 Kapasitas</span>
             </div>
-            <a href="<?= BASE_URL ?>/info_kamar.php?asrama=1" class="btn btn-outline-primary w-100">
-              <i class="bi bi-search me-1"></i> Lihat Kamar Asrama Putra
-            </a>
+            <p class="text-secondary small mb-3">
+              Dilengkapi ruang belajar komunal, musholla representatif, sarana olahraga santai, dan area parkir sepeda motor dengan sistem satu pintu gerbang.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mb-4">
+              <span class="dorm-feature-pill"><i class="bi bi-wifi text-primary"></i> WiFi Kampus</span>
+              <span class="dorm-feature-pill"><i class="bi bi-cup-hot text-danger"></i> Dapur Bersama</span>
+              <span class="dorm-feature-pill"><i class="bi bi-shield-check text-success"></i> CCTV 24 Jam</span>
+              <span class="dorm-feature-pill"><i class="bi bi-building text-info"></i> Musholla</span>
+            </div>
+            <div class="mt-auto">
+              <a href="<?= BASE_URL ?>/info_kamar.php?asrama=1" class="btn btn-outline-primary w-100">
+                <i class="bi bi-door-open me-1"></i> Eksplorasi Kamar Putra
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Asrama Putri -->
+      <!-- Asrama Putri Card -->
       <div class="col-md-6">
-        <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
-          <div class="p-4" style="background: linear-gradient(135deg, #831843 0%, #be185d 100%); color: #fff;">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <span class="badge bg-danger px-3 py-1">Khusus Perempuan</span>
-              <span class="badge bg-light text-dark">4 Lantai</span>
+        <div class="dorm-card">
+          <div class="dorm-card-img-wrapper" style="background: linear-gradient(135deg, #831843 0%, #9D174D 100%);">
+            <div class="dorm-card-badge">
+              <span class="badge-soft badge-soft-danger"><i class="bi bi-gender-female"></i> Khusus Putri</span>
             </div>
-            <h3 class="fw-bold mb-1">Gedung Asrama Putri</h3>
-            <p class="text-warning small mb-0"><i class="bi bi-tag-fill me-1"></i> Tower An-Nisa (Zona Timur Kampus)</p>
+            <div class="text-center text-white px-3">
+              <i class="bi bi-buildings fs-1 mb-2 text-warning opacity-75"></i>
+              <h4 class="fw-bold mb-0">Tower An-Nisa</h4>
+              <small class="text-light opacity-75">Gedung Asrama Mahasiswi Putri</small>
+            </div>
           </div>
-          <div class="card-body p-4">
-            <p class="text-secondary small mb-3">
-              Didesain dengan tingkat privasi tinggi, penjagaan staf putri 24 jam, akses gerbang sistem kontrol otomatis, dapur modern di setiap lantai, dan ruang santai komunal mahasiswi.
-            </p>
-            <h6 class="fw-bold small text-uppercase text-muted mb-2">Fasilitas Utama:</h6>
-            <div class="d-flex flex-wrap gap-2 mb-4">
-              <span class="badge bg-light text-dark border"><i class="bi bi-wifi text-primary me-1"></i> WiFi Kampus</span>
-              <span class="badge bg-light text-dark border"><i class="bi bi-key text-warning me-1"></i> Akses Kartu RFID</span>
-              <span class="badge bg-light text-dark border"><i class="bi bi-cup-hot text-danger me-1"></i> Dapur Modern</span>
-              <span class="badge bg-light text-dark border"><i class="bi bi-shield-lock text-success me-1"></i> Security Putri 24 Jam</span>
-              <span class="badge bg-light text-dark border"><i class="bi bi-basket text-info me-1"></i> Laundry Mesin Cuci</span>
+          <div class="dorm-card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-muted small"><i class="bi bi-geo-alt-fill text-warning me-1"></i> Zona Timur Kampus ULBI</span>
+              <span class="badge bg-light text-dark border">4 Lantai &bull; 120 Kapasitas</span>
             </div>
-            <a href="<?= BASE_URL ?>/info_kamar.php?asrama=2" class="btn btn-outline-danger w-100">
-              <i class="bi bi-search me-1"></i> Lihat Kamar Asrama Putri
-            </a>
+            <p class="text-secondary small mb-3">
+              Didesain dengan tingkat privasi tinggi, penjagaan staf wanita 24 jam, akses RFID otomatis, dapur higienis di tiap lantai, dan ruang komunal mahasiswi.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mb-4">
+              <span class="dorm-feature-pill"><i class="bi bi-wifi text-primary"></i> WiFi Kampus</span>
+              <span class="dorm-feature-pill"><i class="bi bi-key text-warning"></i> Akses Kartu RFID</span>
+              <span class="dorm-feature-pill"><i class="bi bi-shield-lock text-success"></i> Pengawas Putri 24 Jam</span>
+              <span class="dorm-feature-pill"><i class="bi bi-basket text-info"></i> Fasilitas Laundry</span>
+            </div>
+            <div class="mt-auto">
+              <a href="<?= BASE_URL ?>/info_kamar.php?asrama=2" class="btn btn-outline-danger w-100">
+                <i class="bi bi-door-open me-1"></i> Eksplorasi Kamar Putri
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -247,68 +268,67 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Kamar Siap Huni Terbaru -->
-<section class="py-5 bg-light border-top border-bottom">
+<section class="py-5 bg-white border-top border-bottom">
   <div class="container">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
       <div>
-        <span class="badge bg-success text-white px-3 py-1 mb-2">Update Ketersediaan</span>
-        <h2 class="fw-bold" style="color:var(--ulbi-navy);">Kamar Tersedia untuk Reservasi</h2>
-        <p class="text-muted mb-0">Pilih tipe kamar yang sesuai dengan kebutuhan studi Anda.</p>
+        <span class="badge-soft badge-soft-success mb-2">Update Ketersediaan</span>
+        <h2 class="fw-bold" style="color:var(--ulbi-navy);">Katalog Kamar Siap Huni</h2>
+        <p class="text-muted mb-0">Pilih kamar yang sesuai dengan preferensi privasi dan kebutuhan studi Anda.</p>
       </div>
-      <a href="<?= BASE_URL ?>/info_kamar.php" class="btn btn-ulbi-navy mt-3 mt-md-0">
+      <a href="<?= BASE_URL ?>/info_kamar.php" class="btn btn-outline-dark btn-sm mt-3 mt-md-0">
         Lihat Semua Kamar (<?= $stat_kamar_tersedia ?>) <i class="bi bi-arrow-right ms-1"></i>
       </a>
     </div>
 
     <div class="row g-4">
       <?php foreach ($kamar_unggulan as $km): 
-        $sisa_slot = $km['kapasitas'] - $km['terisi'];
+        $sisa_slot = max(0, $km['kapasitas'] - $km['terisi']);
       ?>
       <div class="col-md-6 col-lg-4">
-        <div class="room-card shadow-sm">
-          <div class="room-card-header border-bottom">
+        <div class="room-card-modern">
+          <div class="d-flex justify-content-between align-items-start mb-3 pb-2 border-bottom border-light">
             <div>
-              <span class="badge bg-<?= ($km['kategori_gender'] === 'L') ? 'primary' : 'danger' ?> mb-1">
-                <?= ($km['kategori_gender'] === 'L') ? 'Asrama Putra' : 'Asrama Putri' ?>
+              <span class="badge-soft <?= ($km['kategori_gender'] === 'L') ? 'badge-soft-info' : 'badge-soft-danger' ?> mb-2">
+                <?= ($km['kategori_gender'] === 'L') ? 'Putra' : 'Putri' ?> &bull; <?= htmlspecialchars($km['nama_asrama']) ?>
               </span>
               <h4 class="fw-bold mb-0 text-navy">Kamar <?= htmlspecialchars($km['nomor_kamar']) ?></h4>
               <small class="text-muted">Lantai <?= $km['lantai'] ?> &bull; <?= htmlspecialchars($km['tipe_kamar']) ?></small>
             </div>
-            <div>
-              <?= get_room_badge($km['status']) ?>
-            </div>
+            <?= get_room_badge($km['status']) ?>
           </div>
-          
-          <div class="room-card-body pt-3">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <span class="small text-muted"><i class="bi bi-person-fill"></i> Kapasitas:</span>
-              <span class="fw-bold small"><?= $km['kapasitas'] ?> Orang (Sisa <?= $sisa_slot ?> Slot)</span>
-            </div>
 
-            <!-- Progress bar keterisian -->
-            <div class="progress mb-3" style="height: 6px;">
-              <?php $pct = ($km['kapasitas'] > 0) ? ($km['terisi'] / $km['kapasitas']) * 100 : 0; ?>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-1 small">
+              <span class="text-muted"><i class="bi bi-people me-1"></i>Kapasitas:</span>
+              <span class="fw-bold"><?= $km['terisi'] ?> / <?= $km['kapasitas'] ?> Orang (Sisa: <?= $sisa_slot ?>)</span>
+            </div>
+            <?php $pct = ($km['kapasitas'] > 0) ? ($km['terisi'] / $km['kapasitas']) * 100 : 0; ?>
+            <div class="progress" style="height: 6px; border-radius: 4px;">
               <div class="progress-bar <?= ($pct >= 100) ? 'bg-danger' : (($pct >= 50) ? 'bg-warning' : 'bg-success') ?>" 
                    role="progressbar" style="width: <?= $pct ?>%"></div>
             </div>
+          </div>
 
-            <p class="small text-secondary mb-3" style="min-height: 48px;">
-              <?= htmlspecialchars(substr($km['fasilitas_kamar'], 0, 95)) ?>...
-            </p>
+          <div class="p-2 rounded-3 bg-light mb-3 text-secondary small" style="min-height: 48px; font-size: 0.82rem;">
+            <?= htmlspecialchars(substr($km['fasilitas_kamar'], 0, 95)) ?>...
+          </div>
 
-            <div class="room-price-box">
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="small text-muted">Tarif Sewa:</span>
-                <span class="fw-bold text-success fs-6"><?= format_rupiah($km['tarif_per_semester']) ?></span>
+          <div class="mt-auto pt-2 border-top">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div>
+                <div class="room-price-sub">Tarif per Semester:</div>
+                <div class="room-price-tag"><?= format_rupiah($km['tarif_per_semester']) ?></div>
               </div>
-              <small class="text-muted d-block text-end" style="font-size: 0.75rem;">per semester / mahasiswa</small>
+              <div class="text-end">
+                <div class="room-price-sub">Tarif per Tahun:</div>
+                <div class="fw-bold text-navy small"><?= format_rupiah($km['tarif_per_tahun']) ?></div>
+              </div>
             </div>
 
-            <div class="d-grid mt-3">
-              <a href="<?= BASE_URL ?>/mahasiswa/reservasi.php?kamar_id=<?= $km['id'] ?>" class="btn btn-ulbi-primary btn-sm">
-                <i class="bi bi-check2-circle me-1"></i> Ajukan Reservasi Kamar Ini
-              </a>
-            </div>
+            <a href="<?= BASE_URL ?>/mahasiswa/reservasi.php?kamar_id=<?= $km['id'] ?>" class="btn btn-ulbi-primary btn-sm w-100">
+              <i class="bi bi-plus-circle me-1"></i> Ajukan Reservasi Kamar
+            </a>
           </div>
         </div>
       </div>
@@ -317,58 +337,70 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 </section>
 
-<!-- Alur 6 Langkah Reservasi -->
+<!-- 6 Tahap Alur Reservasi -->
 <section class="py-5">
   <div class="container">
     <div class="text-center mb-5">
-      <span class="badge bg-primary text-white px-3 py-2 fw-semibold rounded-pill mb-2">Alur Layanan</span>
+      <span class="badge-soft badge-soft-navy mb-2">Panduan Cepat</span>
       <h2 class="fw-bold" style="color:var(--ulbi-navy);">6 Tahap Mudah Reservasi Asrama</h2>
       <p class="text-muted mx-auto" style="max-width: 600px;">
-        Proses pengajuan terstandarisasi untuk mempermudah calon penghuni dan menjaga akurasi administrasi asrama.
+        Proses pengajuan terstandarisasi untuk mempermudah calon penghuni baru dan menjamin kelancaran administrasi kampus.
       </p>
     </div>
 
     <div class="row g-4">
       <div class="col-md-4 col-sm-6">
-        <div class="feature-card text-center">
-          <div class="step-number">1</div>
-          <h5 class="fw-bold">Registrasi Akun</h5>
-          <p class="text-secondary small mb-0">Daftarkan akun mahasiswa menggunakan NPM dan data kontak aktif untuk memperoleh akses sistem.</p>
+        <div class="feature-box">
+          <div class="feature-icon-wrapper icon-orange">
+            <i class="bi bi-person-plus-fill"></i>
+          </div>
+          <h5 class="fw-bold mb-2">1. Registrasi Akun</h5>
+          <p class="text-secondary small mb-0">Daftarkan akun mahasiswa menggunakan NPM, email kampus, dan data kontak aktif Anda.</p>
         </div>
       </div>
       <div class="col-md-4 col-sm-6">
-        <div class="feature-card text-center">
-          <div class="step-number">2</div>
-          <h5 class="fw-bold">Lengkapi Profil</h5>
-          <p class="text-secondary small mb-0">Isi data identitas diri, prodi, alamat asal, serta kontak darurat orang tua/wali mahasiswa.</p>
+        <div class="feature-box">
+          <div class="feature-icon-wrapper icon-blue">
+            <i class="bi bi-person-lines-fill"></i>
+          </div>
+          <h5 class="fw-bold mb-2">2. Lengkapi Profil</h5>
+          <p class="text-secondary small mb-0">Isi data diri lengkap, alamat asal, serta nomor kontak darurat orang tua atau wali mahasiswa.</p>
         </div>
       </div>
       <div class="col-md-4 col-sm-6">
-        <div class="feature-card text-center">
-          <div class="step-number">3</div>
-          <h5 class="fw-bold">Pilih Kamar & Periode</h5>
-          <p class="text-secondary small mb-0">Pilih gedung asrama yang sesuai gender, tipe kamar yang tersedia, serta periode sewa.</p>
+        <div class="feature-box">
+          <div class="feature-icon-wrapper icon-green">
+            <i class="bi bi-door-open-fill"></i>
+          </div>
+          <h5 class="fw-bold mb-2">3. Pilih Kamar &amp; Durasi</h5>
+          <p class="text-secondary small mb-0">Pilih gedung asrama sesuai gender, lantai, tipe kamar tersedia, dan durasi sewa (1 semester / 1 tahun).</p>
         </div>
       </div>
       <div class="col-md-4 col-sm-6">
-        <div class="feature-card text-center">
-          <div class="step-number">4</div>
-          <h5 class="fw-bold">Unggah Berkas</h5>
-          <p class="text-secondary small mb-0">Unggah salinan KTM atau bukti registrasi mahasiswa ULBI serta surat pernyataan kepatuhan.</p>
+        <div class="feature-box">
+          <div class="feature-icon-wrapper icon-navy">
+            <i class="bi bi-file-earmark-arrow-up-fill"></i>
+          </div>
+          <h5 class="fw-bold mb-2">4. Unggah KTM / Berkas</h5>
+          <p class="text-secondary small mb-0">Unggah berkas Kartu Tanda Mahasiswa (KTM) atau bukti registrasi sah perkuliahan ULBI.</p>
         </div>
       </div>
       <div class="col-md-4 col-sm-6">
-        <div class="feature-card text-center">
-          <div class="step-number">5</div>
-          <h5 class="fw-bold">Verifikasi Admin</h5>
-          <p class="text-secondary small mb-0">Pengelola asrama memeriksa validitas dokumen dan ketersediaan kuota secara real-time.</p>
+        <div class="feature-box">
+          <div class="feature-icon-wrapper icon-orange">
+            <i class="bi bi-check2-circle"></i>
+          </div>
+          <h5 class="fw-bold mb-2">5. Verifikasi &amp; Bayar</h5>
+          <p class="text-secondary small mb-0">Petugas memvalidasi berkas. Setelah disetujui, lakukan pembayaran sewa dan konfirmasi bukti transfer.</p>
         </div>
       </div>
       <div class="col-md-4 col-sm-6">
-        <div class="feature-card text-center">
-          <div class="step-number">6</div>
-          <h5 class="fw-bold">Cetak Bukti & Check-in</h5>
-          <p class="text-secondary small mb-0">Setelah disetujui, cetak bukti reservasi digital untuk serah terima kunci kamar di kantor asrama.</p>
+        <div class="feature-box">
+          <div class="feature-icon-wrapper icon-blue">
+            <i class="bi bi-printer-fill"></i>
+          </div>
+          <h5 class="fw-bold mb-2">6. Cetak Bukti &amp; Check-in</h5>
+          <p class="text-secondary small mb-0">Cetak lembar bukti reservasi resmi digital dan bawa saat serah terima kunci di kantor asrama.</p>
         </div>
       </div>
     </div>
@@ -377,25 +409,23 @@ require_once __DIR__ . '/includes/header.php';
 
 <!-- Pengumuman Asrama Terbaru -->
 <?php if (!empty($pengumuman)): ?>
-<section class="py-5 bg-light border-top">
+<section class="py-5 bg-white border-top">
   <div class="container">
     <div class="text-center mb-4">
-      <span class="badge bg-warning text-dark px-3 py-1 mb-2">Informasi Resmi</span>
-      <h3 class="fw-bold" style="color:var(--ulbi-navy);">Pengumuman & Pemberitahuan Asrama</h3>
+      <span class="badge-soft badge-soft-warning mb-2">Papan Pengumuman</span>
+      <h3 class="fw-bold" style="color:var(--ulbi-navy);">Pengumuman &amp; Informasi Terkini</h3>
     </div>
 
-    <div class="row g-4">
+    <div class="row g-4 justify-content-center">
       <?php foreach ($pengumuman as $pg): ?>
       <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm rounded-3">
-          <div class="card-body p-4">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <span class="badge bg-secondary"><?= htmlspecialchars($pg['kategori']) ?></span>
-              <small class="text-muted"><i class="bi bi-calendar3 me-1"></i><?= format_tanggal($pg['tanggal']) ?></small>
-            </div>
-            <h5 class="fw-bold mb-2"><?= htmlspecialchars($pg['judul']) ?></h5>
-            <p class="text-secondary small mb-0"><?= nl2br(htmlspecialchars($pg['isi'])) ?></p>
+        <div class="card border-0 shadow-xs rounded-3 h-100 p-4" style="border: 1px solid var(--slate-200) !important;">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="badge-soft badge-soft-navy"><?= htmlspecialchars($pg['kategori']) ?></span>
+            <small class="text-muted"><i class="bi bi-calendar3 me-1"></i><?= format_tanggal($pg['tanggal']) ?></small>
           </div>
+          <h5 class="fw-bold mb-2 text-navy"><?= htmlspecialchars($pg['judul']) ?></h5>
+          <p class="text-secondary small mb-0"><?= nl2br(htmlspecialchars($pg['isi'])) ?></p>
         </div>
       </div>
       <?php endforeach; ?>
@@ -405,18 +435,18 @@ require_once __DIR__ . '/includes/header.php';
 <?php endif; ?>
 
 <!-- Call To Action -->
-<section class="py-5 text-white text-center" style="background: linear-gradient(135deg, var(--ulbi-navy) 0%, #173663 100%);">
-  <div class="container py-3">
+<section class="py-5 text-white text-center" style="background: linear-gradient(135deg, var(--ulbi-navy) 0%, var(--ulbi-navy-dark) 100%);">
+  <div class="container py-4">
     <h2 class="fw-bold mb-3">Siap Menjadi Bagian dari Asrama Mahasiswa ULBI?</h2>
     <p class="text-light opacity-75 mx-auto mb-4" style="max-width: 620px;">
-      Segera ajukan reservasi Anda sebelum kuota kamar untuk semester mendatang terpenuhi.
+      Segera amankan slot kamar pilihan Anda untuk semester akademik mendatang sebelum kuota terpenuhi.
     </p>
     <div class="d-flex justify-content-center gap-3">
-      <a href="<?= BASE_URL ?>/auth/register.php" class="btn btn-ulbi-primary btn-lg px-4">
-        <i class="bi bi-pencil-square me-2"></i> Daftar Akun Mahasiswa
+      <a href="<?= BASE_URL ?>/auth/register.php" class="btn btn-ulbi-primary btn-lg">
+        <i class="bi bi-person-plus-fill me-1"></i> Daftar Akun Mahasiswa
       </a>
-      <a href="<?= BASE_URL ?>/kontak.php" class="btn btn-outline-light btn-lg px-4">
-        <i class="bi bi-question-circle me-2"></i> Hubungi Pengelola
+      <a href="<?= BASE_URL ?>/kontak.php" class="btn btn-ulbi-glass btn-lg">
+        <i class="bi bi-question-circle me-1"></i> Hubungi Pengelola
       </a>
     </div>
   </div>

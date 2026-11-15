@@ -78,22 +78,51 @@
 <!-- Bootstrap 5 Bundle JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Custom JS & Caret Protection -->
+<!-- Custom Modern UI Interactions -->
 <script>
-  // Tooltip & Popover Auto Initialization
   document.addEventListener('DOMContentLoaded', function () {
+    // 1. Tooltip & Popover Auto Initialization
     const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     tooltipTriggerList.map(function (tooltipTriggerEl) {
       return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 
-    // Perlindungan ekstra anti-tanda sisip kursor teks pada elemen statis
-    document.body.addEventListener('click', function (e) {
-      if (!e.target.closest('input, textarea, select, [contenteditable="true"]')) {
-        if (window.getSelection) {
-          window.getSelection().removeAllRanges();
-        }
-      }
+    // 2. Count-Up Animation for Stat Numbers
+    const counterElements = document.querySelectorAll('.stat-number');
+    if ('IntersectionObserver' in window) {
+      const counterObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const targetVal = parseInt(el.textContent.replace(/[^0-9]/g, ''), 10);
+            if (!isNaN(targetVal) && targetVal > 0) {
+              let start = 0;
+              const duration = 800; // ms
+              const stepTime = Math.max(Math.floor(duration / targetVal), 20);
+              const timer = setInterval(() => {
+                start += Math.ceil(targetVal / 25);
+                if (start >= targetVal) {
+                  el.textContent = targetVal;
+                  clearInterval(timer);
+                } else {
+                  el.textContent = start;
+                }
+              }, stepTime);
+            }
+            observer.unobserve(el);
+          }
+        });
+      }, { threshold: 0.2 });
+      counterElements.forEach(el => counterObserver.observe(el));
+    }
+
+    // 3. Smooth Auto-Dismiss Alerts after 6 seconds
+    const alerts = document.querySelectorAll('.alert-dismissible');
+    alerts.forEach(function(alertEl) {
+      setTimeout(function() {
+        const bsAlert = bootstrap.Alert.getOrCreateInstance(alertEl);
+        if (bsAlert) bsAlert.close();
+      }, 6000);
     });
   });
 </script>

@@ -50,25 +50,31 @@ require_once __DIR__ . '/../../includes/header.php';
         <button class="btn btn-sm btn-light border d-lg-none" type="button" onclick="document.getElementById('dashboardSidebar').classList.toggle('show')">
           <i class="bi bi-list fs-5"></i>
         </button>
-        <h5 class="fw-bold mb-0 text-navy" style="color:var(--ulbi-navy);">Direktori Mahasiswa & Penghuni Asrama</h5>
+        <div>
+          <h5 class="fw-bold mb-0 text-navy">Direktori Mahasiswa &amp; Penghuni</h5>
+          <small class="text-muted d-none d-md-block">Data akun mahasiswa terdaftar dan status kamar aktif</small>
+        </div>
       </div>
       <div>
-        <span class="badge bg-light text-dark border p-2">
-          <i class="bi bi-people-fill text-primary me-1"></i> Total: <?= count($mahasiswa_list) ?> Mahasiswa
+        <span class="badge-soft badge-soft-navy px-3 py-2">
+          <i class="bi bi-people-fill me-1"></i> Total: <?= count($mahasiswa_list) ?> Mahasiswa
         </span>
       </div>
     </header>
 
     <div class="dashboard-content">
       <!-- Search Filter -->
-      <div class="card border-0 shadow-sm rounded-3 mb-4">
-        <div class="card-body p-3">
+      <div class="card border-0 shadow-sm rounded-4 mb-4" style="border: 1px solid var(--slate-200) !important;">
+        <div class="card-body p-3 p-md-4">
           <form method="GET" action="" class="row g-2 align-items-center">
             <div class="col-md-9">
-              <input type="text" class="form-control form-control-sm" name="q" placeholder="Cari nama mahasiswa, NPM, atau prodi..." value="<?= htmlspecialchars($q) ?>">
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                <input type="text" class="form-control border-start-0" name="q" placeholder="Cari nama mahasiswa, NPM, atau program studi..." value="<?= htmlspecialchars($q) ?>">
+              </div>
             </div>
             <div class="col-md-3">
-              <button type="submit" class="btn btn-dark btn-sm w-100">
+              <button type="submit" class="btn btn-ulbi-primary w-100">
                 <i class="bi bi-search me-1"></i> Cari Mahasiswa
               </button>
             </div>
@@ -77,19 +83,19 @@ require_once __DIR__ . '/../../includes/header.php';
       </div>
 
       <!-- Table Card -->
-      <div class="card border-0 shadow-sm rounded-3">
-        <div class="card-header bg-white border-bottom py-3">
+      <div class="card border-0 shadow-sm rounded-4" style="border: 1px solid var(--slate-200) !important;">
+        <div class="card-header bg-white border-bottom py-3 px-4">
           <h6 class="fw-bold mb-0 text-navy">
-            <i class="bi bi-person-lines-fill text-warning me-2"></i>Daftar Akun Mahasiswa Terdaftar di SIRASMA
+            <i class="bi bi-person-lines-fill text-warning me-2"></i>Daftar Akun Mahasiswa di SIRASMA
           </h6>
         </div>
 
         <div class="card-body p-0">
           <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0 small">
-              <thead class="table-light">
+            <table class="table table-custom align-middle mb-0">
+              <thead>
                 <tr>
-                  <th>NPM & Nama Mahasiswa</th>
+                  <th>NPM &amp; Nama Mahasiswa</th>
                   <th>Program Studi</th>
                   <th>Gender</th>
                   <th>Kontak / WhatsApp</th>
@@ -100,36 +106,44 @@ require_once __DIR__ . '/../../includes/header.php';
               <tbody>
                 <?php if (empty($mahasiswa_list)): ?>
                   <tr>
-                    <td colspan="6" class="text-center py-4 text-muted">Tidak ada data mahasiswa ditemukan.</td>
+                    <td colspan="6" class="text-center py-5 text-muted">
+                      <i class="bi bi-person-x fs-1 d-block mb-2 text-muted"></i>
+                      Tidak ada data mahasiswa yang sesuai dengan pencarian.
+                    </td>
                   </tr>
                 <?php else: ?>
-                  <?php foreach ($mahasiswa_list as $m): ?>
+                  <?php foreach ($mahasiswa_list as $m): 
+                    $is_l = ($m['gender'] === 'L');
+                  ?>
                   <tr>
                     <td>
-                      <strong class="text-navy"><?= htmlspecialchars($m['full_name']) ?></strong>
-                      <div class="text-muted" style="font-size: 0.75rem;">NPM: <?= htmlspecialchars($m['npm'] ?? '-') ?> &bull; User: <?= htmlspecialchars($m['username']) ?></div>
+                      <div class="fw-bold text-navy"><?= htmlspecialchars($m['full_name']) ?></div>
+                      <div class="text-muted small">NPM: <?= htmlspecialchars($m['npm'] ?? '-') ?> &bull; User: <?= htmlspecialchars($m['username']) ?></div>
                     </td>
-                    <td><?= htmlspecialchars($m['prodi'] ?? '-') ?></td>
                     <td>
-                      <span class="badge bg-<?= ($m['gender'] === 'L') ? 'primary' : 'danger' ?>">
-                        <?= ($m['gender'] === 'L') ? 'Putra' : 'Putri' ?>
+                      <span class="small fw-semibold"><?= htmlspecialchars($m['prodi'] ?? '-') ?></span>
+                    </td>
+                    <td>
+                      <span class="badge-soft <?= $is_l ? 'badge-soft-info' : 'badge-soft-danger' ?>">
+                        <i class="bi <?= $is_l ? 'bi-gender-male' : 'bi-gender-female' ?>"></i>
+                        <?= $is_l ? 'Putra' : 'Putri' ?>
                       </span>
                     </td>
                     <td>
-                      <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $m['phone']) ?>" target="_blank" class="text-decoration-none">
+                      <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $m['phone']) ?>" target="_blank" class="text-decoration-none fw-semibold">
                         <i class="bi bi-whatsapp text-success me-1"></i><?= htmlspecialchars($m['phone'] ?? '-') ?>
                       </a>
                     </td>
                     <td>
-                      <?= htmlspecialchars($m['nama_ortu_wali'] ?? '-') ?>
-                      <div class="text-muted" style="font-size:0.75rem;"><?= htmlspecialchars($m['hp_ortu_wali'] ?? '') ?></div>
+                      <div class="small fw-semibold text-navy"><?= htmlspecialchars($m['nama_ortu_wali'] ?? '-') ?></div>
+                      <div class="text-muted small"><?= htmlspecialchars($m['hp_ortu_wali'] ?? '') ?></div>
                     </td>
                     <td>
                       <?php if (!empty($m['kamar_aktif'])): ?>
-                        <span class="badge bg-success"><i class="bi bi-house-check me-1"></i>Kamar <?= htmlspecialchars($m['kamar_aktif']) ?></span>
-                        <div class="text-muted" style="font-size:0.75rem;"><?= htmlspecialchars($m['asrama_aktif']) ?></div>
+                        <span class="badge-soft badge-soft-success"><i class="bi bi-house-check-fill"></i>Kamar <?= htmlspecialchars($m['kamar_aktif']) ?></span>
+                        <div class="text-muted small"><?= htmlspecialchars($m['asrama_aktif']) ?></div>
                       <?php else: ?>
-                        <span class="badge bg-secondary">Bukan Penghuni Aktif</span>
+                        <span class="badge-soft badge-soft-navy">Bukan Penghuni Aktif</span>
                       <?php endif; ?>
                     </td>
                   </tr>

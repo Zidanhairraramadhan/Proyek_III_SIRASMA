@@ -26,98 +26,18 @@ $user = current_user();
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   
-  <!-- Custom Stylesheets dengan Cache Buster Otomatis -->
-  <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css?v=<?= time() ?>">
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css?v=<?= file_exists(BASE_PATH . '/assets/css/style.css') ? filemtime(BASE_PATH . '/assets/css/style.css') : '1.0' ?>">
   <?php if (isset($is_dashboard) && $is_dashboard): ?>
-  <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/dashboard.css?v=<?= time() ?>">
+  <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/dashboard.css?v=<?= file_exists(BASE_PATH . '/assets/css/dashboard.css') ? filemtime(BASE_PATH . '/assets/css/dashboard.css') : '1.0' ?>">
   <?php endif; ?>
-
-  <!-- Global Anti-Caret & Cursor Protection -->
-  <style>
-    /* 1. Global Reset: Kursor panah standar, matikan tanda sisip ketik (caret), matikan seleksi teks */
-    html, body, *, *::before, *::after {
-      cursor: default !important;
-      caret-color: transparent !important;
-      -webkit-user-select: none !important;
-      -moz-user-select: none !important;
-      -ms-user-select: none !important;
-      user-select: none !important;
-      -webkit-touch-callout: none !important;
-    }
-
-    /* 2. Semua tag teks secara eksplisit diwajibkan kursor default (panah biasa) */
-    p, h1, h2, h3, h4, h5, h6, span, label, div, li, td, th, b, strong, small, em, i, section, article, header, footer, nav {
-      cursor: default !important;
-      caret-color: transparent !important;
-      -webkit-user-select: none !important;
-      user-select: none !important;
-    }
-
-    /* 3. Elemen yang dapat diklik wajib memiliki kursor pointer (tangan penunjuk) */
-    a, a *, button, button *, .btn, .btn *, [role="button"], select, .form-check-input, .nav-link, .nav-link *, .dropdown-item, .page-link, .badge-clickable {
-      cursor: pointer !important;
-    }
-
-    /* 4. Khusus formulir isian (input & textarea) tetap normal untuk mengetik data */
-    input:not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="reset"]),
-    textarea {
-      cursor: text !important;
-      caret-color: #f37021 !important;
-      -webkit-user-select: text !important;
-      -moz-user-select: text !important;
-      -ms-user-select: text !important;
-      user-select: text !important;
-    }
-  </style>
-
-  <!-- Anti-Caret Browsing Script -->
-  <script>
-    (function () {
-      // Menolak penempatan tanda sisip kursor (Caret) pada seluruh teks saat diklik
-      document.addEventListener('mousedown', function (e) {
-        var isFormInput = e.target.closest('input:not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]), textarea, select, [contenteditable="true"]');
-        if (!isFormInput) {
-          var isClickable = e.target.closest('a, button, .btn, [role="button"], select, .form-check-input, label');
-          if (!isClickable) {
-            e.preventDefault();
-          }
-          if (window.getSelection) {
-            window.getSelection().removeAllRanges();
-          }
-        }
-      }, true);
-
-      // Memblokir seleksi blok teks
-      document.addEventListener('selectstart', function (e) {
-        if (!e.target.closest('input, textarea, [contenteditable="true"]')) {
-          e.preventDefault();
-          return false;
-        }
-      }, true);
-
-      // Menghapus kursor jika Caret Browsing browser mencoba menaruh kursor pada teks
-      document.addEventListener('selectionchange', function () {
-        var activeEl = document.activeElement;
-        var isFormInput = activeEl && (['INPUT', 'TEXTAREA'].indexOf(activeEl.tagName) !== -1 || activeEl.isContentEditable);
-        if (!isFormInput) {
-          var sel = window.getSelection();
-          if (sel && sel.rangeCount > 0) {
-            sel.removeAllRanges();
-          }
-        }
-      });
-
-      // Mencegah tombol F7 memicu fitur Caret Browsing bawaan browser
-      window.addEventListener('keydown', function (e) {
-        if (e.key === 'F7' || e.keyCode === 118) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      }, true);
-    })();
-  </script>
 </head>
-<body style="cursor: default !important; -webkit-user-select: none !important; user-select: none !important; caret-color: transparent !important;">
+<body>
 
 <?php if (!isset($is_dashboard) || !$is_dashboard): ?>
 <!-- Public Topbar & Navbar -->

@@ -1,35 +1,45 @@
 /**
- * SIRASMA ULBI - Dashboard Portal Styles
- * Digunakan pada Portal Admin dan Portal Mahasiswa
+ * SIRASMA ULBI - Dashboard & Portal Stylesheet
+ * Universitas Logistik dan Bisnis Internasional (ULBI)
+ * Portal Admin & Portal Mahasiswa - Campus SaaS Experience
  */
 
+/* ==========================================================================
+   1. DASHBOARD WRAPPER & LAYOUT
+   ========================================================================== */
 .dashboard-wrapper {
   display: flex;
   min-height: 100vh;
   width: 100%;
-  cursor: default;
+  background-color: var(--slate-100);
 }
 
-.stat-card, .custom-table-card, .sidebar-header, .sidebar-user, .timeline-item {
-  cursor: default;
+.dashboard-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-color: var(--slate-50);
 }
 
-/* Sidebar */
+/* ==========================================================================
+   2. MODERN SIDEBAR
+   ========================================================================== */
 .dashboard-sidebar {
-  width: 270px;
-  background-color: var(--ulbi-navy);
-  color: #ffffff;
+  width: 268px;
+  background: linear-gradient(180deg, var(--ulbi-navy) 0%, var(--ulbi-navy-dark) 100%);
+  color: #FFFFFF;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  transition: all 0.3s ease;
-  z-index: 1000;
+  transition: all var(--transition-normal);
+  z-index: 1040;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .sidebar-header {
-  padding: 1.5rem 1.25rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.35rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -38,54 +48,63 @@
 .sidebar-brand-name {
   font-weight: 800;
   font-size: 1.15rem;
-  color: #ffffff;
-  letter-spacing: -0.3px;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
   margin: 0;
+  line-height: 1.1;
 }
 
 .sidebar-brand-sub {
-  font-size: 0.75rem;
-  color: #ff9d54;
+  font-size: 0.72rem;
+  color: #FDBA74;
   margin: 0;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .sidebar-user {
-  padding: 1.25rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.15rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.18);
 }
 
 .sidebar-user-avatar {
   width: 42px;
   height: 42px;
-  border-radius: 50%;
-  background: var(--ulbi-orange);
-  color: #ffffff;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--ulbi-orange) 0%, var(--ulbi-orange-hover) 100%);
+  color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  box-shadow: 0 4px 10px rgba(249, 115, 22, 0.35);
+  flex-shrink: 0;
 }
 
 .sidebar-user-name {
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #FFFFFF;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 160px;
+  max-width: 155px;
 }
 
 .sidebar-user-role {
-  font-size: 0.75rem;
-  color: #94a3b8;
+  font-size: 0.74rem;
+  color: #94A3B8;
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .sidebar-menu {
@@ -97,16 +116,16 @@
 }
 
 .sidebar-category {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #64748b;
-  padding: 0.75rem 0.75rem 0.25rem;
+  font-size: 0.68rem;
   font-weight: 700;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 1rem 0.75rem 0.4rem;
 }
 
 .sidebar-item {
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .sidebar-link {
@@ -114,55 +133,54 @@
   align-items: center;
   gap: 12px;
   padding: 0.65rem 0.85rem;
-  color: #cbd5e1;
+  color: #CBD5E1;
   text-decoration: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  position: relative;
 }
 
 .sidebar-link i {
-  font-size: 1.1rem;
-  width: 22px;
-  text-align: center;
+  font-size: 1.15rem;
+  color: #94A3B8;
+  transition: color var(--transition-fast);
 }
 
 .sidebar-link:hover {
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.sidebar-link:hover i {
+  color: var(--ulbi-orange);
 }
 
 .sidebar-link.active {
-  background-color: var(--ulbi-orange);
-  color: #ffffff;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(243, 112, 33, 0.3);
+  color: #FFFFFF;
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.22) 0%, rgba(249, 115, 22, 0.08) 100%);
+  border-left: 3.5px solid var(--ulbi-orange);
 }
 
-.sidebar-footer {
-  padding: 1rem 1.25rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+.sidebar-link.active i {
+  color: var(--ulbi-orange);
 }
 
-/* Main Content Area */
-.dashboard-main {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  background-color: #f1f5f9;
-  min-width: 0;
-}
-
+/* ==========================================================================
+   3. TOPBAR COMPONENT
+   ========================================================================== */
 .dashboard-topbar {
-  background: #ffffff;
-  height: 64px;
-  padding: 0 1.75rem;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--slate-200);
+  padding: 0.95rem 1.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--ulbi-border);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  box-shadow: var(--shadow-xs);
 }
 
 .dashboard-content {
@@ -170,126 +188,183 @@
   flex-grow: 1;
 }
 
-/* Stat Cards */
+/* ==========================================================================
+   4. STAT CARDS (KPI COUNTERS)
+   ========================================================================== */
 .stat-card {
-  background: #ffffff;
-  border: 1px solid var(--ulbi-border);
-  border-radius: 12px;
-  padding: 1.25rem 1.5rem;
+  background: #FFFFFF;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 1.35rem 1.4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-  transition: transform 0.2s;
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--slate-300);
 }
 
 .stat-title {
-  font-size: 0.85rem;
-  color: var(--ulbi-text-muted);
-  font-weight: 600;
-  margin-bottom: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.05em;
+  color: var(--slate-500);
+  margin-bottom: 0.35rem;
 }
 
 .stat-number {
-  font-size: 1.85rem;
+  font-size: 1.95rem;
   font-weight: 800;
   color: var(--ulbi-navy);
   margin: 0;
-  line-height: 1.1;
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
 .stat-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.45rem;
+  flex-shrink: 0;
 }
 
-/* Custom Table Styles */
-.custom-table-card {
-  background: #ffffff;
-  border: 1px solid var(--ulbi-border);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-}
-
-.custom-table-header {
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--ulbi-border);
+/* ==========================================================================
+   5. RESERVATION TIMELINE (VISUAL STEPPER)
+   ========================================================================== */
+.stepper-wrapper {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-}
-
-.table th {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  font-weight: 700;
-  color: var(--ulbi-text-muted);
-  background-color: #f8fafc;
-  padding: 0.85rem 1.25rem;
-  border-bottom: 1px solid var(--ulbi-border);
-}
-
-.table td {
-  padding: 1rem 1.25rem;
-  vertical-align: middle;
-  font-size: 0.9rem;
-}
-
-/* Timeline */
-.timeline {
   position: relative;
-  padding-left: 24px;
+  margin-bottom: 2rem;
 }
 
-.timeline::before {
+.stepper-wrapper::before {
   content: '';
   position: absolute;
-  left: 7px;
-  top: 5px;
-  bottom: 5px;
-  width: 2px;
-  background: var(--ulbi-border);
+  top: 18px;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  background-color: var(--slate-200);
+  z-index: 1;
 }
 
-.timeline-item {
+.stepper-item {
   position: relative;
-  margin-bottom: 1.5rem;
+  z-index: 2;
+  text-align: center;
+  flex: 1;
 }
 
-.timeline-marker {
-  position: absolute;
-  left: -24px;
-  top: 2px;
-  width: 16px;
-  height: 16px;
+.stepper-counter {
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: var(--ulbi-orange);
-  border: 3px solid #ffffff;
-  box-shadow: 0 0 0 2px var(--ulbi-orange);
+  background: #FFFFFF;
+  border: 2px solid var(--slate-300);
+  color: var(--slate-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin: 0 auto 0.5rem;
+  transition: all var(--transition-fast);
 }
 
-/* Responsive */
+.stepper-item.completed .stepper-counter {
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+  color: #FFFFFF;
+}
+
+.stepper-item.active .stepper-counter {
+  background-color: var(--ulbi-orange);
+  border-color: var(--ulbi-orange);
+  color: #FFFFFF;
+  box-shadow: 0 0 0 4px var(--ulbi-orange-soft);
+}
+
+.stepper-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--slate-700);
+}
+
+.stepper-sub {
+  font-size: 0.72rem;
+  color: var(--slate-500);
+}
+
+/* ==========================================================================
+   6. DATA TABLE ELEVATION
+   ========================================================================== */
+.table-responsive {
+  border-radius: var(--radius-md);
+}
+
+.table-custom {
+  margin-bottom: 0;
+  font-size: 0.88rem;
+}
+
+.table-custom thead th {
+  background-color: var(--slate-100);
+  color: var(--slate-600);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--slate-200);
+  white-space: nowrap;
+}
+
+.table-custom tbody td {
+  padding: 0.95rem 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--slate-200);
+  color: var(--slate-800);
+}
+
+.table-custom tbody tr:hover td {
+  background-color: rgba(249, 115, 22, 0.03);
+}
+
+/* ==========================================================================
+   7. MOBILE DRAWER NAVIGATION
+   ========================================================================== */
 @media (max-width: 991.98px) {
   .dashboard-sidebar {
     position: fixed;
-    left: -270px;
-    height: 100vh;
-  }
-  .dashboard-sidebar.show {
+    top: 0;
+    bottom: 0;
     left: 0;
+    transform: translateX(-100%);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+  }
+  
+  .dashboard-sidebar.show {
+    transform: translateX(0);
+  }
+
+  .dashboard-content {
+    padding: 1.25rem 1rem;
+  }
+  
+  .dashboard-topbar {
+    padding: 0.75rem 1rem;
   }
 }

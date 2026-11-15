@@ -157,7 +157,7 @@ $current_dir = basename(dirname($_SERVER['PHP_SELF']));
   <div class="sidebar-footer text-muted small">
     <div class="d-flex justify-content-between align-items-center">
       <span>SIRASMA v1.0</span>
-      <span class="badge bg-secondary">ULBI 2026</span>
+      <span class="badge badge-soft-warning">ULBI 2026</span>
     </div>
   </div>
 </aside>

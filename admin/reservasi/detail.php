@@ -143,21 +143,53 @@ require_once __DIR__ . '/../../includes/header.php';
         </div>
       <?php endif; ?>
 
+      <!-- Visual Stepper Progress -->
+      <div class="card border-0 shadow-sm rounded-4 mb-4" style="border: 1px solid var(--slate-200) !important;">
+        <div class="card-body p-4">
+          <div class="stepper-wrapper mb-0">
+            <div class="stepper-item completed">
+              <div class="stepper-counter"><i class="bi bi-check-lg"></i></div>
+              <div class="stepper-title">Pengajuan</div>
+              <div class="stepper-sub"><?= date('d/m/Y', strtotime($rsv['tanggal_pengajuan'])) ?></div>
+            </div>
+            <div class="stepper-item <?= ($rsv['status'] === 'disetujui') ? 'completed' : (($rsv['status'] === 'menunggu_verifikasi') ? 'active' : '') ?>">
+              <div class="stepper-counter">
+                <?php if ($rsv['status'] === 'disetujui'): ?><i class="bi bi-check-lg"></i><?php elseif ($rsv['status'] === 'ditolak'): ?><i class="bi bi-x-lg"></i><?php else: ?>2<?php endif; ?>
+              </div>
+              <div class="stepper-title">Verifikasi Admin</div>
+              <div class="stepper-sub"><?= ucfirst($rsv['status']) ?></div>
+            </div>
+            <div class="stepper-item <?= ($rsv['status_pembayaran'] === 'lunas') ? 'completed' : (($rsv['status_pembayaran'] === 'menunggu_konfirmasi') ? 'active' : '') ?>">
+              <div class="stepper-counter">
+                <?php if ($rsv['status_pembayaran'] === 'lunas'): ?><i class="bi bi-check-lg"></i><?php else: ?>3<?php endif; ?>
+              </div>
+              <div class="stepper-title">Pembayaran</div>
+              <div class="stepper-sub"><?= ($rsv['status_pembayaran'] === 'lunas') ? 'Lunas' : 'Konfirmasi' ?></div>
+            </div>
+            <div class="stepper-item <?= ($rsv['status'] === 'selesai' || ($rsv['status'] === 'disetujui' && $rsv['status_pembayaran'] === 'lunas')) ? 'completed' : '' ?>">
+              <div class="stepper-counter">4</div>
+              <div class="stepper-title">Check-in Kamar</div>
+              <div class="stepper-sub"><?= format_tanggal($rsv['rencana_checkin']) ?></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Header Status Banner -->
-      <div class="card border-0 shadow-sm rounded-3 mb-4">
+      <div class="card border-0 shadow-sm rounded-4 mb-4" style="border: 1px solid var(--slate-200) !important;">
         <div class="card-body p-4 d-flex flex-wrap justify-content-between align-items-center gap-3">
           <div>
-            <span class="small text-muted">Nomor Registrasi:</span>
-            <h4 class="fw-bold mb-0 text-primary"><?= htmlspecialchars($rsv['kode_reservasi']) ?></h4>
-            <small class="text-muted">Diajukan pada: <?= format_tanggal($rsv['tanggal_pengajuan'], true) ?></small>
+            <span class="small text-muted text-uppercase fw-bold" style="font-size:0.75rem; letter-spacing:0.05em;">Nomor Registrasi Reservasi:</span>
+            <h3 class="fw-bold mb-0 text-navy"><?= htmlspecialchars($rsv['kode_reservasi']) ?></h3>
+            <small class="text-muted"><i class="bi bi-calendar3 me-1"></i>Diajukan pada: <?= format_tanggal($rsv['tanggal_pengajuan'], true) ?></small>
           </div>
-          <div class="text-md-end">
-            <div class="mb-1">
-              <span class="small text-muted me-1">Status Permohonan:</span>
+          <div class="text-md-end d-flex flex-column gap-2 align-items-md-end">
+            <div class="d-flex align-items-center gap-2">
+              <span class="small text-muted">Status Permohonan:</span>
               <?= get_status_badge($rsv['status']) ?>
             </div>
-            <div>
-              <span class="small text-muted me-1">Status Pembayaran:</span>
+            <div class="d-flex align-items-center gap-2">
+              <span class="small text-muted">Status Pembayaran:</span>
               <?= get_payment_badge($rsv['status_pembayaran']) ?>
             </div>
           </div>
@@ -167,8 +199,8 @@ require_once __DIR__ . '/../../includes/header.php';
       <div class="row g-4">
         <!-- Biodata Mahasiswa -->
         <div class="col-lg-6">
-          <div class="card border-0 shadow-sm rounded-3 h-100">
-            <div class="card-header bg-white border-bottom py-3">
+          <div class="card border-0 shadow-sm rounded-4 h-100" style="border: 1px solid var(--slate-200) !important;">
+            <div class="card-header bg-white border-bottom py-3 px-4">
               <h6 class="fw-bold mb-0 text-navy">
                 <i class="bi bi-person-badge-fill text-warning me-2"></i>Identitas Mahasiswa Pemohon
               </h6>
@@ -177,7 +209,7 @@ require_once __DIR__ . '/../../includes/header.php';
               <table class="table table-sm table-borderless small mb-0">
                 <tr>
                   <td class="text-muted" style="width: 140px;">Nama Lengkap:</td>
-                  <td><strong><?= htmlspecialchars($rsv['full_name']) ?></strong></td>
+                  <td><strong class="text-navy"><?= htmlspecialchars($rsv['full_name']) ?></strong></td>
                 </tr>
                 <tr>
                   <td class="text-muted">NPM:</td>
@@ -189,11 +221,16 @@ require_once __DIR__ . '/../../includes/header.php';
                 </tr>
                 <tr>
                   <td class="text-muted">Jenis Kelamin:</td>
-                  <td><?= ($rsv['gender'] === 'L') ? 'Laki-laki (Putra)' : 'Perempuan (Putri)' ?></td>
+                  <td>
+                    <span class="badge-soft <?= ($rsv['gender'] === 'L') ? 'badge-soft-info' : 'badge-soft-danger' ?>">
+                      <i class="bi <?= ($rsv['gender'] === 'L') ? 'bi-gender-male' : 'bi-gender-female' ?>"></i>
+                      <?= ($rsv['gender'] === 'L') ? 'Laki-laki (Putra)' : 'Perempuan (Putri)' ?>
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td class="text-muted">WhatsApp / HP:</td>
-                  <td><a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $rsv['phone']) ?>" target="_blank" class="text-decoration-none"><i class="bi bi-whatsapp text-success me-1"></i><?= htmlspecialchars($rsv['phone']) ?></a></td>
+                  <td><a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $rsv['phone']) ?>" target="_blank" class="text-decoration-none fw-semibold"><i class="bi bi-whatsapp text-success me-1"></i><?= htmlspecialchars($rsv['phone']) ?></a></td>
                 </tr>
                 <tr>
                   <td class="text-muted">Email:</td>
@@ -208,7 +245,7 @@ require_once __DIR__ . '/../../includes/header.php';
                   <td><?= htmlspecialchars($rsv['nama_ortu_wali'] ?? '-') ?> (<?= htmlspecialchars($rsv['hp_ortu_wali'] ?? '-') ?>)</td>
                 </tr>
                 <tr>
-                  <td class="text-muted">Catatan Pemohon:</td>
+                  <td class="text-muted">Catatan Mahasiswa:</td>
                   <td><em><?= nl2br(htmlspecialchars($rsv['catatan_mahasiswa'] ?: 'Tidak ada catatan tambahan.')) ?></em></td>
                 </tr>
               </table>
@@ -218,17 +255,17 @@ require_once __DIR__ . '/../../includes/header.php';
 
         <!-- Detail Alokasi Kamar & Biaya -->
         <div class="col-lg-6">
-          <div class="card border-0 shadow-sm rounded-3 h-100">
-            <div class="card-header bg-white border-bottom py-3">
+          <div class="card border-0 shadow-sm rounded-4 h-100" style="border: 1px solid var(--slate-200) !important;">
+            <div class="card-header bg-white border-bottom py-3 px-4">
               <h6 class="fw-bold mb-0 text-navy">
-                <i class="bi bi-door-open-fill text-warning me-2"></i>Rincian Kamar & Biaya
+                <i class="bi bi-door-open-fill text-warning me-2"></i>Rincian Kamar &amp; Biaya Sewa
               </h6>
             </div>
             <div class="card-body p-4">
               <table class="table table-sm table-borderless small mb-0">
                 <tr>
                   <td class="text-muted" style="width: 140px;">Gedung Asrama:</td>
-                  <td><strong><?= htmlspecialchars($rsv['nama_asrama']) ?></strong></td>
+                  <td><strong class="text-navy"><?= htmlspecialchars($rsv['nama_asrama']) ?></strong></td>
                 </tr>
                 <tr>
                   <td class="text-muted">Nomor Kamar:</td>
@@ -240,40 +277,40 @@ require_once __DIR__ . '/../../includes/header.php';
                 </tr>
                 <tr>
                   <td class="text-muted">Kapasitas Kamar:</td>
-                  <td><?= $rsv['terisi'] ?> / <?= $rsv['kapasitas'] ?> Orang</td>
+                  <td><strong><?= $rsv['terisi'] ?> / <?= $rsv['kapasitas'] ?> Orang</strong></td>
                 </tr>
                 <tr>
                   <td class="text-muted">Periode Sewa:</td>
                   <td><?= htmlspecialchars($rsv['nama_periode']) ?> (<?= htmlspecialchars($rsv['durasi_sewa']) ?>)</td>
                 </tr>
                 <tr>
-                  <td class="text-muted">Rencana Masuk:</td>
+                  <td class="text-muted">Rencana Check-in:</td>
                   <td><strong><?= format_tanggal($rsv['rencana_checkin']) ?></strong></td>
                 </tr>
                 <tr>
                   <td class="text-muted">Total Tagihan:</td>
-                  <td><h5 class="fw-bold text-success mb-0"><?= format_rupiah($rsv['total_biaya']) ?></h5></td>
+                  <td><h4 class="fw-bold text-success mb-0"><?= format_rupiah($rsv['total_biaya']) ?></h4></td>
                 </tr>
               </table>
 
               <!-- Berkas Lampiran -->
               <div class="mt-4 pt-3 border-top">
-                <h6 class="fw-bold text-navy small mb-2">Berkas yang Diunggah Mahasiswa:</h6>
+                <h6 class="fw-bold text-navy small mb-2">Berkas yang Diunggah:</h6>
                 <div class="d-flex flex-wrap gap-2">
                   <?php if (!empty($rsv['dokumen_ktm'])): ?>
                     <a href="<?= BASE_URL ?>/uploads/ktm/<?= htmlspecialchars($rsv['dokumen_ktm']) ?>" target="_blank" class="btn btn-outline-primary btn-sm">
-                      <i class="bi bi-file-earmark-person me-1"></i> Buka Salinan KTM
+                      <i class="bi bi-file-earmark-person me-1"></i> Buka Berkas KTM
                     </a>
                   <?php else: ?>
-                    <span class="badge bg-light text-muted border p-2">KTM belum diunggah</span>
+                    <span class="badge-soft badge-soft-navy">KTM belum diunggah</span>
                   <?php endif; ?>
 
                   <?php if (!empty($rsv['bukti_pembayaran'])): ?>
                     <a href="<?= BASE_URL ?>/uploads/pembayaran/<?= htmlspecialchars($rsv['bukti_pembayaran']) ?>" target="_blank" class="btn btn-outline-success btn-sm">
-                      <i class="bi bi-receipt me-1"></i> Buka Bukti Transfer Bayar
+                      <i class="bi bi-receipt me-1"></i> Buka Bukti Transfer
                     </a>
                   <?php else: ?>
-                    <span class="badge bg-light text-muted border p-2">Bukti bayar belum diunggah</span>
+                    <span class="badge-soft badge-soft-warning">Bukti bayar belum diunggah</span>
                   <?php endif; ?>
                 </div>
               </div>
@@ -283,8 +320,8 @@ require_once __DIR__ . '/../../includes/header.php';
 
         <!-- Form Aksi Verifikasi Administrator -->
         <div class="col-lg-12">
-          <div class="card border-0 shadow-sm rounded-3">
-            <div class="card-header bg-white border-bottom py-3">
+          <div class="card border-0 shadow-sm rounded-4" style="border: 1px solid var(--slate-200) !important;">
+            <div class="card-header bg-white border-bottom py-3 px-4">
               <h6 class="fw-bold mb-0 text-navy">
                 <i class="bi bi-check2-square text-warning me-2"></i>Aksi Keputusan Verifikasi Administrator
               </h6>
@@ -294,8 +331,8 @@ require_once __DIR__ . '/../../includes/header.php';
                 <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
 
                 <div class="mb-3">
-                  <label class="form-label small fw-semibold">Catatan Petugas Verifikator (Terlihat oleh Mahasiswa):</label>
-                  <textarea class="form-control" name="catatan_admin" rows="3" placeholder="Tuliskan catatan verifikasi, nomor rekening jika belum bayar, atau alasan penolakan jika permohonan ditolak..."><?= htmlspecialchars($rsv['catatan_admin'] ?? '') ?></textarea>
+                  <label class="form-label">Catatan Petugas Verifikator (Dapat dibaca oleh Mahasiswa):</label>
+                  <textarea class="form-control" name="catatan_admin" rows="3" placeholder="Tuliskan catatan verifikasi, instruksi pembayaran jika disetujui, atau alasan jika ditolak..."><?= htmlspecialchars($rsv['catatan_admin'] ?? '') ?></textarea>
                 </div>
 
                 <div class="d-flex flex-wrap gap-2 pt-2">
@@ -321,7 +358,7 @@ require_once __DIR__ . '/../../includes/header.php';
 
                   <!-- Cetak Bukti -->
                   <a href="<?= BASE_URL ?>/mahasiswa/cetak_bukti.php?id=<?= $rsv['id'] ?>" target="_blank" class="btn btn-outline-dark ms-auto">
-                    <i class="bi bi-printer me-1"></i> Cetak Lembar Reservasi
+                    <i class="bi bi-printer me-1"></i> Cetak Lembar Bukti
                   </a>
                 </div>
               </form>

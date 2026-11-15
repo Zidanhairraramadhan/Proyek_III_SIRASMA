@@ -87,10 +87,10 @@ require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="auth-container">
-  <div class="auth-card auth-card-wide my-4">
+  <div class="auth-card auth-card-wide my-4 shadow-lg">
     <div class="auth-header">
       <a href="<?= BASE_URL ?>/index.php" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-3">
-        <div class="brand-emblem-badge" style="width: 50px; height: 50px; font-size: 1.5rem;">
+        <div class="brand-emblem-badge" style="width: 48px; height: 48px; font-size: 1.35rem;">
           <i class="bi bi-building-fill"></i>
         </div>
         <div class="text-start">
@@ -98,12 +98,12 @@ require_once __DIR__ . '/../includes/header.php';
           <div class="brand-text-sub">Reservasi Asrama Kampus</div>
         </div>
       </a>
-      <h4 class="fw-bold text-navy mb-1" style="color:var(--ulbi-navy);">Daftar Akun Mahasiswa</h4>
-      <p class="text-muted small">Layanan Reservasi Asrama Universitas Logistik dan Bisnis Internasional</p>
+      <h4 class="fw-bold text-navy mb-1">Registrasi Akun Mahasiswa</h4>
+      <p class="text-muted small">Layanan resmi pendaftaran akun hunian kampus ULBI</p>
     </div>
 
     <?php if (!empty($error)): ?>
-      <div class="alert alert-danger d-flex align-items-center mb-4 py-2" role="alert">
+      <div class="alert alert-danger d-flex align-items-center mb-4 py-2 rounded-3" role="alert">
         <i class="bi bi-exclamation-triangle-fill me-2 fs-5"></i>
         <div class="small"><?= htmlspecialchars($error) ?></div>
       </div>
@@ -114,19 +114,19 @@ require_once __DIR__ . '/../includes/header.php';
 
       <div class="row g-3">
         <div class="col-md-6">
-          <label for="full_name" class="form-label fw-semibold small">Nama Lengkap *</label>
+          <label for="full_name" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
           <input type="text" class="form-control" id="full_name" name="full_name" 
                  placeholder="Sesuai KTM / KTP" value="<?= htmlspecialchars($_POST['full_name'] ?? '') ?>" required>
         </div>
 
         <div class="col-md-6">
-          <label for="npm" class="form-label fw-semibold small">NPM (Nomor Pokok Mahasiswa) *</label>
+          <label for="npm" class="form-label">NPM (Nomor Pokok Mahasiswa) <span class="text-danger">*</span></label>
           <input type="text" class="form-control" id="npm" name="npm" 
                  placeholder="Contoh: 714240045" value="<?= htmlspecialchars($_POST['npm'] ?? '') ?>" required>
         </div>
 
         <div class="col-md-6">
-          <label for="prodi" class="form-label fw-semibold small">Program Studi *</label>
+          <label for="prodi" class="form-label">Program Studi <span class="text-danger">*</span></label>
           <select class="form-select" id="prodi" name="prodi" required>
             <option value="">-- Pilih Program Studi --</option>
             <option value="D4 Teknik Informatika">D4 Teknik Informatika</option>
@@ -142,61 +142,65 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
 
         <div class="col-md-6">
-          <label class="form-label fw-semibold small">Jenis Kelamin *</label>
-          <div class="d-flex gap-4 mt-1">
+          <label class="form-label">Jenis Kelamin <span class="text-danger">*</span></label>
+          <div class="d-flex gap-4 mt-2">
             <div class="form-check">
               <input class="form-check-input" type="radio" name="gender" id="gender_l" value="L" checked>
-              <label class="form-check-label small" for="gender_l">Laki-laki (Asrama Putra)</label>
+              <label class="form-check-label small fw-semibold" for="gender_l">
+                <i class="bi bi-gender-male text-primary me-1"></i>Laki-laki (Putra)
+              </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="gender" id="gender_p" value="P">
-              <label class="form-check-label small" for="gender_p">Perempuan (Asrama Putri)</label>
+              <label class="form-check-label small fw-semibold" for="gender_p">
+                <i class="bi bi-gender-female text-danger me-1"></i>Perempuan (Putri)
+              </label>
             </div>
           </div>
         </div>
 
         <div class="col-md-6">
-          <label for="phone" class="form-label fw-semibold small">Nomor WhatsApp Aktif *</label>
+          <label for="phone" class="form-label">Nomor WhatsApp Aktif <span class="text-danger">*</span></label>
           <input type="text" class="form-control" id="phone" name="phone" 
                  placeholder="Contoh: 081234567890" value="<?= htmlspecialchars($_POST['phone'] ?? '') ?>" required>
         </div>
 
         <div class="col-md-6">
-          <label for="email" class="form-label fw-semibold small">Alamat Email *</label>
+          <label for="email" class="form-label">Alamat Email <span class="text-danger">*</span></label>
           <input type="email" class="form-control" id="email" name="email" 
                  placeholder="nama@ulbi.ac.id atau gmail" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
         </div>
 
         <div class="col-md-12">
-          <label for="username" class="form-label fw-semibold small">Username untuk Login *</label>
+          <label for="username" class="form-label">Username untuk Login <span class="text-danger">*</span></label>
           <input type="text" class="form-control" id="username" name="username" 
                  placeholder="Gunakan huruf kecil tanpa spasi" value="<?= htmlspecialchars($_POST['username'] ?? '') ?>" required>
         </div>
 
         <div class="col-md-6">
-          <label for="password" class="form-label fw-semibold small">Kata Sandi *</label>
+          <label for="password" class="form-label">Kata Sandi <span class="text-danger">*</span></label>
           <input type="password" class="form-control" id="password" name="password" placeholder="Minimal 6 karakter" required>
         </div>
 
         <div class="col-md-6">
-          <label for="password_confirm" class="form-label fw-semibold small">Konfirmasi Kata Sandi *</label>
+          <label for="password_confirm" class="form-label">Konfirmasi Kata Sandi <span class="text-danger">*</span></label>
           <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Ulangi kata sandi" required>
         </div>
       </div>
 
-      <div class="form-check mt-3 mb-3">
-        <input class="form-check-input" type="checkbox" id="terms" required>
-        <label class="form-check-label small text-muted" for="terms">
-          Saya menyatakan data yang saya masukkan adalah benar dan bersedia menaati seluruh tata tertib asrama ULBI.
+      <div class="form-check mt-3 mb-4 p-2 bg-light rounded-3 border">
+        <input class="form-check-input ms-1" type="checkbox" id="terms" required>
+        <label class="form-check-label small text-secondary ms-2" for="terms">
+          Saya menyatakan data yang diisi adalah sah dan bersedia mematuhi seluruh peraturan &amp; tata tertib asrama ULBI.
         </label>
       </div>
 
       <button type="submit" class="btn btn-ulbi-primary w-100 py-2">
-        <i class="bi bi-person-check-fill me-1"></i> Selesaikan Registrasi
+        <i class="bi bi-person-check-fill me-1"></i> Selesaikan Registrasi Akun
       </button>
     </form>
 
-    <div class="text-center mt-3 pt-2 border-top">
+    <div class="text-center mt-3 pt-3 border-top">
       <p class="small text-muted mb-0">Sudah memiliki akun? 
         <a href="<?= BASE_URL ?>/auth/login.php" class="fw-bold text-decoration-none" style="color:var(--ulbi-orange);">Masuk di sini</a>
       </p>

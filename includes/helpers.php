@@ -44,17 +44,17 @@ function format_tanggal($datetime, $with_time = false) {
 function get_status_badge($status) {
     switch ($status) {
         case 'menunggu_verifikasi':
-            return '<span class="badge bg-warning text-dark"><i class="bi bi-clock-history me-1"></i>Menunggu Verifikasi</span>';
+            return '<span class="badge-soft badge-soft-warning"><i class="bi bi-clock-history"></i>Menunggu Verifikasi</span>';
         case 'disetujui':
-            return '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Disetujui</span>';
+            return '<span class="badge-soft badge-soft-success"><i class="bi bi-check-circle-fill"></i>Disetujui</span>';
         case 'ditolak':
-            return '<span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>Ditolak</span>';
+            return '<span class="badge-soft badge-soft-danger"><i class="bi bi-x-circle-fill"></i>Ditolak</span>';
         case 'dibatalkan':
-            return '<span class="badge bg-secondary"><i class="bi bi-slash-circle me-1"></i>Dibatalkan</span>';
+            return '<span class="badge-soft badge-soft-navy"><i class="bi bi-slash-circle"></i>Dibatalkan</span>';
         case 'selesai':
-            return '<span class="badge bg-primary"><i class="bi bi-award me-1"></i>Selesai</span>';
+            return '<span class="badge-soft badge-soft-info"><i class="bi bi-award-fill"></i>Selesai</span>';
         default:
-            return '<span class="badge bg-light text-dark">' . htmlspecialchars(ucfirst(str_replace('_', ' ', $status))) . '</span>';
+            return '<span class="badge-soft badge-soft-navy">' . htmlspecialchars(ucfirst(str_replace('_', ' ', (string)$status))) . '</span>';
     }
 }
 
@@ -64,13 +64,13 @@ function get_status_badge($status) {
 function get_payment_badge($status) {
     switch ($status) {
         case 'belum_bayar':
-            return '<span class="badge bg-secondary"><i class="bi bi-hourglass me-1"></i>Belum Bayar</span>';
+            return '<span class="badge-soft badge-soft-danger"><i class="bi bi-hourglass-split"></i>Belum Bayar</span>';
         case 'menunggu_konfirmasi':
-            return '<span class="badge bg-info text-dark"><i class="bi bi-search me-1"></i>Menunggu Konfirmasi</span>';
+            return '<span class="badge-soft badge-soft-warning"><i class="bi bi-search"></i>Menunggu Konfirmasi</span>';
         case 'lunas':
-            return '<span class="badge bg-success"><i class="bi bi-shield-check me-1"></i>Lunas</span>';
+            return '<span class="badge-soft badge-soft-success"><i class="bi bi-shield-check"></i>Lunas</span>';
         default:
-            return '<span class="badge bg-light text-dark">' . htmlspecialchars($status) . '</span>';
+            return '<span class="badge-soft badge-soft-navy">' . htmlspecialchars((string)$status) . '</span>';
     }
 }
 
@@ -80,15 +80,15 @@ function get_payment_badge($status) {
 function get_room_badge($status) {
     switch ($status) {
         case 'tersedia':
-            return '<span class="badge bg-success"><i class="bi bi-door-open me-1"></i>Tersedia</span>';
+            return '<span class="badge-soft badge-soft-success"><i class="bi bi-door-open-fill"></i>Tersedia</span>';
         case 'penuh':
-            return '<span class="badge bg-danger"><i class="bi bi-door-closed me-1"></i>Penuh</span>';
+            return '<span class="badge-soft badge-soft-danger"><i class="bi bi-door-closed-fill"></i>Penuh</span>';
         case 'pemeliharaan':
-            return '<span class="badge bg-warning text-dark"><i class="bi bi-tools me-1"></i>Perbaikan / Pemeliharaan</span>';
+            return '<span class="badge-soft badge-soft-warning"><i class="bi bi-tools"></i>Perbaikan</span>';
         case 'nonaktif':
-            return '<span class="badge bg-secondary"><i class="bi bi-archive me-1"></i>Diarsipkan</span>';
+            return '<span class="badge-soft badge-soft-navy"><i class="bi bi-archive-fill"></i>Diarsipkan</span>';
         default:
-            return '<span class="badge bg-light text-dark">' . htmlspecialchars($status) . '</span>';
+            return '<span class="badge-soft badge-soft-navy">' . htmlspecialchars((string)$status) . '</span>';
     }
 }
 

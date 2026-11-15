@@ -125,10 +125,13 @@ require_once __DIR__ . '/../includes/header.php';
         <button class="btn btn-sm btn-light border d-lg-none" type="button" onclick="document.getElementById('dashboardSidebar').classList.toggle('show')">
           <i class="bi bi-list fs-5"></i>
         </button>
-        <h5 class="fw-bold mb-0 text-navy" style="color:var(--ulbi-navy);">Profil & Data Mahasiswa</h5>
+        <div>
+          <h5 class="fw-bold mb-0 text-navy" style="color:var(--ulbi-navy);">Profil & Pengaturan Akun</h5>
+          <span class="text-muted small">Kelola data pribadi, informasi domisili, dan keamanan akun Anda</span>
+        </div>
       </div>
       <div>
-        <a href="<?= BASE_URL ?>/mahasiswa/index.php" class="btn btn-outline-secondary btn-sm">
+        <a href="<?= BASE_URL ?>/mahasiswa/index.php" class="btn btn-light border btn-sm px-3">
           <i class="bi bi-arrow-left me-1"></i> Kembali ke Dashboard
         </a>
       </div>
@@ -136,19 +139,22 @@ require_once __DIR__ . '/../includes/header.php';
 
     <div class="dashboard-content">
       <?php if (!empty($error)): ?>
-        <div class="alert alert-danger d-flex align-items-center mb-4 py-2" role="alert">
-          <i class="bi bi-exclamation-triangle-fill me-2 fs-5"></i>
-          <div class="small"><?= htmlspecialchars($error) ?></div>
+        <div class="alert alert-danger d-flex align-items-center mb-4 py-3 rounded-4 shadow-sm border-0" role="alert">
+          <i class="bi bi-exclamation-triangle-fill me-3 fs-4 text-danger"></i>
+          <div>
+            <strong class="d-block">Terjadi Kesalahan</strong>
+            <span class="small"><?= htmlspecialchars($error) ?></span>
+          </div>
         </div>
       <?php endif; ?>
 
       <div class="row g-4">
         <!-- Main Form -->
         <div class="col-lg-8">
-          <div class="card border-0 shadow-sm rounded-3">
+          <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom py-3">
               <h6 class="fw-bold mb-0 text-navy">
-                <i class="bi bi-person-lines-fill text-warning me-2"></i>Informasi Biodata Pribadi
+                <i class="bi bi-person-lines-fill text-orange me-2"></i>Informasi Biodata Pribadi Mahasiswa
               </h6>
             </div>
             <div class="card-body p-4">
@@ -156,12 +162,17 @@ require_once __DIR__ . '/../includes/header.php';
                 <input type="hidden" name="action" value="update_profile">
                 <input type="hidden" name="csrf_token" value="<?= generate_csrf_token() ?>">
 
-                <h6 class="fw-bold small text-muted text-uppercase mb-3">Data Akademik & Akun:</h6>
+                <!-- Subsection 1 -->
+                <div class="d-flex align-items-center gap-2 mb-3">
+                  <span class="d-inline-flex align-items-center justify-content-center bg-orange text-white rounded-circle fw-bold" style="width:24px;height:24px;font-size:0.75rem;">1</span>
+                  <h6 class="fw-bold text-navy mb-0">Data Akademik & Akun</h6>
+                </div>
+
                 <div class="row g-3 mb-4">
                   <div class="col-md-6">
                     <label class="form-label small fw-semibold">Nomor Pokok Mahasiswa (NPM)</label>
                     <input type="text" class="form-control bg-light" value="<?= htmlspecialchars($data['npm'] ?? '') ?>" readonly>
-                    <small class="text-muted" style="font-size: 0.75rem;">NPM bersifat unik dan tidak dapat diubah.</small>
+                    <small class="text-muted" style="font-size: 0.75rem;">NPM bersifat unik dan terhubung ke pangkalan data.</small>
                   </div>
 
                   <div class="col-md-6">
@@ -170,17 +181,17 @@ require_once __DIR__ . '/../includes/header.php';
                   </div>
 
                   <div class="col-md-6">
-                    <label class="form-label small fw-semibold">Nama Lengkap *</label>
+                    <label class="form-label small fw-semibold">Nama Lengkap <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" name="full_name" value="<?= htmlspecialchars($data['full_name'] ?? '') ?>" required>
                   </div>
 
                   <div class="col-md-6">
-                    <label class="form-label small fw-semibold">Nomor WhatsApp / HP Aktif *</label>
+                    <label class="form-label small fw-semibold">Nomor WhatsApp / HP Aktif <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" name="phone" value="<?= htmlspecialchars($data['phone'] ?? '') ?>" required>
                   </div>
 
                   <div class="col-md-6">
-                    <label class="form-label small fw-semibold">Program Studi *</label>
+                    <label class="form-label small fw-semibold">Program Studi <span class="text-danger">*</span></label>
                     <select class="form-select" name="prodi" required>
                       <option value="D4 Teknik Informatika" <?= (($data['prodi'] ?? '') === 'D4 Teknik Informatika') ? 'selected' : '' ?>>D4 Teknik Informatika</option>
                       <option value="D4 Logistik Bisnis" <?= (($data['prodi'] ?? '') === 'D4 Logistik Bisnis') ? 'selected' : '' ?>>D4 Logistik Bisnis</option>
@@ -218,7 +229,12 @@ require_once __DIR__ . '/../includes/header.php';
                   </div>
                 </div>
 
-                <h6 class="fw-bold small text-muted text-uppercase mb-3">Alamat Asal Mahasiswa:</h6>
+                <!-- Subsection 2 -->
+                <div class="d-flex align-items-center gap-2 mb-3 pt-3 border-top">
+                  <span class="d-inline-flex align-items-center justify-content-center bg-orange text-white rounded-circle fw-bold" style="width:24px;height:24px;font-size:0.75rem;">2</span>
+                  <h6 class="fw-bold text-navy mb-0">Alamat Asal Mahasiswa</h6>
+                </div>
+
                 <div class="row g-3 mb-4">
                   <div class="col-md-12">
                     <label class="form-label small fw-semibold">Alamat Domisili Asal (Sesuai KTP)</label>
@@ -236,15 +252,20 @@ require_once __DIR__ . '/../includes/header.php';
                   </div>
                 </div>
 
-                <h6 class="fw-bold small text-muted text-uppercase mb-3">Kontak Orang Tua / Wali (Darurat):</h6>
+                <!-- Subsection 3 -->
+                <div class="d-flex align-items-center gap-2 mb-3 pt-3 border-top">
+                  <span class="d-inline-flex align-items-center justify-content-center bg-orange text-white rounded-circle fw-bold" style="width:24px;height:24px;font-size:0.75rem;">3</span>
+                  <h6 class="fw-bold text-navy mb-0">Kontak Orang Tua / Wali (Darurat)</h6>
+                </div>
+
                 <div class="row g-3 mb-4">
                   <div class="col-md-6">
-                    <label class="form-label small fw-semibold">Nama Orang Tua / Wali *</label>
+                    <label class="form-label small fw-semibold">Nama Orang Tua / Wali <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" name="nama_ortu_wali" value="<?= htmlspecialchars($data['nama_ortu_wali'] ?? '') ?>" required>
                   </div>
 
                   <div class="col-md-6">
-                    <label class="form-label small fw-semibold">Nomor HP Orang Tua / Wali *</label>
+                    <label class="form-label small fw-semibold">Nomor HP Orang Tua / Wali <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" name="hp_ortu_wali" value="<?= htmlspecialchars($data['hp_ortu_wali'] ?? '') ?>" required>
                   </div>
 
@@ -254,8 +275,8 @@ require_once __DIR__ . '/../includes/header.php';
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-ulbi-primary">
-                  <i class="bi bi-save me-1"></i> Simpan Pembaruan Profil
+                <button type="submit" class="btn btn-navy px-4 py-2">
+                  <i class="bi bi-check2-circle me-1"></i> Simpan Pembaruan Profil
                 </button>
               </form>
             </div>
@@ -264,9 +285,9 @@ require_once __DIR__ . '/../includes/header.php';
 
         <!-- Sidebar Password & Security Card -->
         <div class="col-lg-4">
-          <div class="card border-0 shadow-sm rounded-3 mb-4">
+          <div class="card border-0 shadow-sm rounded-4 mb-4">
             <div class="card-header bg-white border-bottom py-3">
-              <h6 class="fw-bold mb-0 text-navy"><i class="bi bi-key-fill text-warning me-2"></i>Ganti Kata Sandi</h6>
+              <h6 class="fw-bold mb-0 text-navy"><i class="bi bi-key-fill text-orange me-2"></i>Ganti Kata Sandi</h6>
             </div>
             <div class="card-body p-4">
               <form method="POST" action="">
@@ -283,28 +304,34 @@ require_once __DIR__ . '/../includes/header.php';
                   <input type="password" class="form-control" name="new_password" placeholder="Min. 6 karakter" required>
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-4">
                   <label class="form-label small fw-semibold">Konfirmasi Kata Sandi Baru</label>
                   <input type="password" class="form-control" name="confirm_password" required>
                 </div>
 
-                <button type="submit" class="btn btn-outline-dark w-100 btn-sm">
+                <button type="submit" class="btn btn-outline-dark w-100 py-2">
                   <i class="bi bi-shield-lock me-1"></i> Perbarui Kata Sandi
                 </button>
               </form>
             </div>
           </div>
 
-          <div class="card border-0 shadow-sm rounded-3 bg-light">
+          <div class="card border-0 shadow-sm rounded-4" style="background:#F8FAFC; border: 1px solid #E2E8F0;">
             <div class="card-body p-4">
-              <h6 class="fw-bold text-navy mb-2"><i class="bi bi-shield-check text-success me-1"></i> Keamanan Akun</h6>
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-shield-check text-success fs-5"></i>
+                <h6 class="fw-bold text-navy mb-0">Keamanan Data</h6>
+              </div>
               <p class="small text-muted mb-0">
-                Data Anda dilindungi dengan standar keamanan sistem informasi ULBI. Akses terbatas hanya untuk pengelola asrama yang berwenang.
+                Informasi dan kontak darurat Anda disimpan dengan enkripsi dan standar privasi institusi Universitas Logistik dan Bisnis Internasional (ULBI).
               </p>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </main>
+</div>
     </div>
   </main>
 </div>

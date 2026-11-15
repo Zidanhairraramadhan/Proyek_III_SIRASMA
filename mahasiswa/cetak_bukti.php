@@ -147,11 +147,11 @@ if (!$data) {
 <body>
 
 <div class="container text-center my-3 no-print">
-  <button class="btn btn-primary btn-sm px-3 shadow" onclick="window.print()">
-    <i class="bi bi-printer me-1"></i> Cetak / Simpan PDF
+  <button class="btn btn-primary btn-sm px-4 py-2 shadow-sm fw-semibold" onclick="window.print()">
+    <i class="bi bi-printer-fill me-1"></i> Cetak / Simpan PDF
   </button>
-  <button class="btn btn-outline-secondary btn-sm px-3 ms-2" onclick="window.close()">
-    Tutup Halaman
+  <button class="btn btn-outline-secondary btn-sm px-3 py-2 ms-2" onclick="window.close()">
+    <i class="bi bi-x-circle me-1"></i> Tutup Halaman
   </button>
 </div>
 

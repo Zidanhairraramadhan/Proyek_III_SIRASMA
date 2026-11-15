@@ -54,30 +54,41 @@ require_once __DIR__ . '/../../includes/header.php';
         <button class="btn btn-sm btn-light border d-lg-none" type="button" onclick="document.getElementById('dashboardSidebar').classList.toggle('show')">
           <i class="bi bi-list fs-5"></i>
         </button>
-        <h5 class="fw-bold mb-0 text-navy" style="color:var(--ulbi-navy);">Catatan Aktivitas Sistem (Audit Trail)</h5>
+        <div>
+          <h5 class="fw-bold mb-0 text-navy" style="color:var(--ulbi-navy);">Audit Log & Catatan Aktivitas</h5>
+          <span class="text-muted small">Rekaman jejak aktivitas sistem dan integritas akses SIRASMA</span>
+        </div>
       </div>
       <div>
-        <span class="badge bg-dark border border-secondary text-warning p-2">
-          <i class="bi bi-shield-check me-1"></i> Keamanan SI: Least Privilege & Logging Aktif
+        <span class="badge badge-soft-warning px-3 py-2">
+          <i class="bi bi-shield-check me-1"></i> Audit Trail Aktif
         </span>
       </div>
     </header>
 
     <div class="dashboard-content">
       <!-- Security Notice Card -->
-      <div class="alert alert-secondary border-0 shadow-sm d-flex align-items-center mb-4 p-3 rounded-3">
-        <i class="bi bi-shield-lock-fill fs-3 text-warning me-3"></i>
-        <div class="small">
-          <strong>Modul Kepatuhan Audit Keamanan:</strong> Setiap tindakan otentikasi login, pengajuan reservasi oleh mahasiswa, perubahan status oleh administrator, penambahan kamar, serta percobaan akses tanpa izin dicatat otomatis bersama stempel waktu (timestamp) dan alamat IP pemohon.
+      <div class="card border-0 shadow-sm rounded-4 mb-4" style="background: linear-gradient(135deg, rgba(15, 30, 53, 0.03), rgba(249, 115, 22, 0.05)); border-left: 4px solid var(--ulbi-navy) !important;">
+        <div class="card-body p-3 p-md-4 d-flex align-items-center">
+          <div class="d-flex align-items-center justify-content-center rounded-3 bg-white shadow-sm me-3 flex-shrink-0" style="width:48px;height:48px;">
+            <i class="bi bi-shield-lock-fill fs-4 text-warning"></i>
+          </div>
+          <div class="small">
+            <strong class="text-navy d-block mb-1">Kepatuhan Audit & Keamanan Sistem Informasi:</strong>
+            <span class="text-muted">Setiap tindakan otentikasi login, pengajuan reservasi oleh mahasiswa, perubahan status oleh administrator, penambahan kamar, serta percobaan akses tanpa izin dicatat otomatis bersama stempel waktu (timestamp) dan alamat IP pemohon untuk audit forensik.</span>
+          </div>
         </div>
       </div>
 
       <!-- Filter Bar -->
-      <div class="card border-0 shadow-sm rounded-3 mb-4">
+      <div class="card border-0 shadow-sm rounded-4 mb-4">
         <div class="card-body p-3">
           <form method="GET" action="" class="row g-2 align-items-center">
             <div class="col-md-5">
-              <input type="text" class="form-control form-control-sm" name="q" placeholder="Cari username, deskripsi, atau IP..." value="<?= htmlspecialchars($q) ?>">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                <input type="text" class="form-control form-control-sm border-start-0" name="q" placeholder="Cari username, deskripsi, atau IP..." value="<?= htmlspecialchars($q) ?>">
+              </div>
             </div>
             <div class="col-md-4">
               <select name="action" class="form-select form-select-sm">
@@ -90,10 +101,10 @@ require_once __DIR__ . '/../../includes/header.php';
               </select>
             </div>
             <div class="col-md-3 d-flex gap-2">
-              <button type="submit" class="btn btn-dark btn-sm w-100">
-                <i class="bi bi-search me-1"></i> Saring Log
+              <button type="submit" class="btn btn-navy btn-sm w-100">
+                <i class="bi bi-funnel me-1"></i> Saring Log
               </button>
-              <a href="<?= BASE_URL ?>/admin/logs/index.php" class="btn btn-outline-secondary btn-sm" title="Reset">
+              <a href="<?= BASE_URL ?>/admin/logs/index.php" class="btn btn-light border btn-sm px-3" title="Reset Filter">
                 <i class="bi bi-arrow-counterclockwise"></i>
               </a>
             </div>
@@ -102,60 +113,66 @@ require_once __DIR__ . '/../../includes/header.php';
       </div>
 
       <!-- Log Table Card -->
-      <div class="card border-0 shadow-sm rounded-3">
+      <div class="card border-0 shadow-sm rounded-4">
         <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
           <h6 class="fw-bold mb-0 text-navy">
-            <i class="bi bi-journal-text text-warning me-2"></i>Rekaman Log Audit Terbaru (Menampilkan <?= count($logs) ?> entri)
+            <i class="bi bi-journal-text text-orange me-2"></i>Rekaman Log Audit Terbaru
           </h6>
+          <span class="badge bg-light text-muted border">Menampilkan <?= count($logs) ?> entri</span>
         </div>
 
         <div class="card-body p-0">
           <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0 small">
-              <thead class="table-light">
+            <table class="table table-custom align-middle mb-0 small">
+              <thead>
                 <tr>
                   <th style="width: 170px;">Waktu & Tanggal</th>
                   <th style="width: 160px;">Pengguna (User)</th>
                   <th style="width: 190px;">Jenis Aksi</th>
                   <th>Deskripsi Aktivitas</th>
-                  <th style="width: 120px;">IP Address</th>
+                  <th style="width: 130px;">IP Address</th>
                 </tr>
               </thead>
               <tbody>
                 <?php if (empty($logs)): ?>
                   <tr>
-                    <td colspan="5" class="text-center py-4 text-muted">Belum ada catatan log aktivitas yang cocok.</td>
+                    <td colspan="5" class="text-center py-5 text-muted">
+                      <i class="bi bi-inbox fs-2 d-block mb-2 text-muted opacity-50"></i>
+                      Belum ada catatan log aktivitas yang cocok dengan filter.
+                    </td>
                   </tr>
                 <?php else: ?>
                   <?php foreach ($logs as $l): ?>
                   <tr>
                     <td class="text-muted font-monospace" style="font-size:0.8rem;">
-                      <?= date('d/m/Y H:i:s', strtotime($l['created_at'])) ?>
+                      <i class="bi bi-clock me-1 opacity-50"></i><?= date('d/m/Y H:i:s', strtotime($l['created_at'])) ?>
                     </td>
                     <td>
-                      <strong><?= htmlspecialchars($l['username'] ?? 'guest') ?></strong>
-                      <?php if (($l['user_role'] ?? '') === 'admin'): ?>
-                        <span class="badge bg-warning text-dark" style="font-size:0.65rem;">ADMIN</span>
-                      <?php elseif (($l['user_role'] ?? '') === 'mahasiswa'): ?>
-                        <span class="badge bg-primary" style="font-size:0.65rem;">MHS</span>
-                      <?php else: ?>
-                        <span class="badge bg-secondary" style="font-size:0.65rem;">GUEST</span>
-                      <?php endif; ?>
+                      <div class="d-flex align-items-center gap-1">
+                        <strong class="text-navy"><?= htmlspecialchars($l['username'] ?? 'guest') ?></strong>
+                        <?php if (($l['user_role'] ?? '') === 'admin'): ?>
+                          <span class="badge badge-soft-warning ms-1" style="font-size:0.65rem;">ADMIN</span>
+                        <?php elseif (($l['user_role'] ?? '') === 'mahasiswa'): ?>
+                          <span class="badge badge-soft-primary ms-1" style="font-size:0.65rem;">MHS</span>
+                        <?php else: ?>
+                          <span class="badge badge-soft-secondary ms-1" style="font-size:0.65rem;">GUEST</span>
+                        <?php endif; ?>
+                      </div>
                     </td>
                     <td>
                       <?php 
-                        $badge_class = 'bg-secondary';
-                        if (str_contains($l['action'], 'LOGIN_SUCCESS')) $badge_class = 'bg-success';
-                        elseif (str_contains($l['action'], 'UNAUTHORIZED') || str_contains($l['action'], 'FAILED')) $badge_class = 'bg-danger';
-                        elseif (str_contains($l['action'], 'APPROVE')) $badge_class = 'bg-success';
-                        elseif (str_contains($l['action'], 'REJECT') || str_contains($l['action'], 'CANCEL')) $badge_class = 'bg-danger';
-                        elseif (str_contains($l['action'], 'SUBMIT')) $badge_class = 'bg-primary';
-                        elseif (str_contains($l['action'], 'ROOM')) $badge_class = 'bg-info text-dark';
+                        $badge_class = 'badge-soft-secondary';
+                        if (str_contains($l['action'], 'LOGIN_SUCCESS')) $badge_class = 'badge-soft-success';
+                        elseif (str_contains($l['action'], 'UNAUTHORIZED') || str_contains($l['action'], 'FAILED')) $badge_class = 'badge-soft-danger';
+                        elseif (str_contains($l['action'], 'APPROVE')) $badge_class = 'badge-soft-success';
+                        elseif (str_contains($l['action'], 'REJECT') || str_contains($l['action'], 'CANCEL')) $badge_class = 'badge-soft-danger';
+                        elseif (str_contains($l['action'], 'SUBMIT')) $badge_class = 'badge-soft-primary';
+                        elseif (str_contains($l['action'], 'ROOM')) $badge_class = 'badge-soft-info';
                       ?>
                       <span class="badge <?= $badge_class ?>"><?= htmlspecialchars($l['action']) ?></span>
                     </td>
-                    <td><?= htmlspecialchars($l['description']) ?></td>
-                    <td><code class="text-muted"><?= htmlspecialchars($l['ip_address'] ?? '127.0.0.1') ?></code></td>
+                    <td class="text-secondary"><?= htmlspecialchars($l['description']) ?></td>
+                    <td><code class="text-muted px-2 py-1 bg-light rounded" style="font-size:0.75rem;"><?= htmlspecialchars($l['ip_address'] ?? '127.0.0.1') ?></code></td>
                   </tr>
                   <?php endforeach; ?>
                 <?php endif; ?>
@@ -164,6 +181,9 @@ require_once __DIR__ . '/../../includes/header.php';
           </div>
         </div>
       </div>
+    </div>
+  </main>
+</div>
     </div>
   </main>
 </div>
